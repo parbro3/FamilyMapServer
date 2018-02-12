@@ -5,4 +5,16 @@ package Service;
  */
 
 public class RegisterService {
+
+
+    /*
+    This is the brains of the operations... the service classes
+     */
+
+    /*
+    Register Service class:
+     register(uer)
+     UserDAO.findUser(username);
+     UserDAO.add(user);
+     */
 }

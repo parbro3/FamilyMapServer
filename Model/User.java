@@ -17,6 +17,11 @@ public class User {
     private String personID;
 
 
+    /*
+    model, request, and result are classes that are just data holders...
+     */
+
+
     /**
      *
      * @param userDAO
