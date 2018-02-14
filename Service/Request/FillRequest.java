@@ -1,8 +1,12 @@
 package Service.Request;
 
 /**
- * Created by Parker on 2/10/18.
+ * Represents a request object to populates the server's database
+ * with generated data for the specified user name
  */
 
 public class FillRequest {
+
+    public FillRequest() {}
+
 }

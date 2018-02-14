@@ -1,8 +1,11 @@
 package Service.Request;
 
 /**
- * Created by Parker on 2/10/18.
+ * Represents a request object to clear the database
  */
 
 public class ClearRequest {
+
+    public ClearRequest() {}
+
 }

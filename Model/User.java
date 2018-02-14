@@ -3,7 +3,8 @@ package Model;
 import DAO.UserDAO;
 
 /**
- * Created by Parker on 2/10/18.
+ * Represents a Model class User in memory
+ * Only getters and setters because it's a shared dataholder object
  */
 
 public class User {
@@ -21,15 +22,10 @@ public class User {
     model, request, and result are classes that are just data holders...
      */
 
-
     /**
-     *
-     * @param userDAO
+     * Empty constructor to be accessed by Gson
      */
-    public User(UserDAO userDAO)
-    {
-
-    }
+    public User() {}
 
     public String getUserName() {
         return userName;

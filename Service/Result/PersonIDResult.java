@@ -1,32 +1,23 @@
-package Model;
+package Service.Result;
 
 /**
- * Represents a Model class Person in memory
- * Only getters and setters because it's a shared dataholder object
+ * Represents the PersonID Result object with the appropriate message and data
+ * depending on the outcome of the PersonID service.
  */
 
-public class Person {
+public class PersonIDResult {
 
-    String personID;
     String descendant;
+    String personID;
     String firstName;
     String lastName;
     String gender;
     String fatherID;
     String motherID;
     String spouseID;
+    String errorMessage;
 
-    /**
-     * Empty constructor to be accessed by Gson
-     */
-    Person(){}
-
-    public String getPersonID() {
-        return personID;
-    }
-
-    public void setPersonID(String personID) {
-        this.personID = personID;
+    public PersonIDResult() {
     }
 
     public String getDescendant() {
@@ -35,6 +26,14 @@ public class Person {
 
     public void setDescendant(String descendant) {
         this.descendant = descendant;
+    }
+
+    public String getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(String personID) {
+        this.personID = personID;
     }
 
     public String getFirstName() {
@@ -83,5 +82,13 @@ public class Person {
 
     public void setSpouseID(String spouseID) {
         this.spouseID = spouseID;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

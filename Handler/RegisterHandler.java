@@ -1,10 +1,45 @@
 package Handler;
 
+import Service.*;
+import Service.Result.*;
+import Service.Request.*;
+
 /**
- * Created by Parker on 2/10/18.
+ * Represents the register handler object instantiated when the /register api is called
  */
 
 public class RegisterHandler {
+
+    public RegisterHandler(String[] inputTestArray) {
+
+        RegisterRequest rRequest = new RegisterRequest();
+        rRequest.setUserName(inputTestArray[0]);
+
+        RegisterService rService = new RegisterService();
+
+        RegisterResult rResult = rService.service(rRequest);
+
+    }
+
+    /*
+    Instantiate a RegisterService class.
+    call RegisterService.register();
+
+    something like..
+
+    RegisterRequest rRequest = new RegisterRequest();
+    rRequest.username = httphandler.bodyinfo[0];
+
+    RegisterService rService = new RegisterService();
+
+    RegisterResult rResult = rService.register( rRequest );
+
+
+
+    maybe have a service interface that has a service method that every class has to implement
+
+     */
+
 
 
 /*

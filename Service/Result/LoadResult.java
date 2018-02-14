@@ -1,16 +1,15 @@
 package Service.Result;
 
 /**
- * Represents the Clear Result object with the appropriate message
- * depending on the outcome of the clear service.
+ * Represents the Load Result object with the appropriate message
+ * depending on the outcome of the Load service.
  */
-
-public class ClearResult {
+public class LoadResult {
 
     String successMessage;
     String errorMessage;
 
-    public ClearResult() {
+    public LoadResult() {
     }
 
     public String getSuccessMessage() {

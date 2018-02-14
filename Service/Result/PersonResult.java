@@ -1,16 +1,16 @@
 package Service.Result;
 
 /**
- * Represents the Clear Result object with the appropriate message
- * depending on the outcome of the clear service.
+ * Represents the Person Result object with the appropriate message
+ * depending on the outcome of the Person service.
  */
 
-public class ClearResult {
+public class PersonResult {
 
     String successMessage;
     String errorMessage;
 
-    public ClearResult() {
+    public PersonResult() {
     }
 
     public String getSuccessMessage() {
