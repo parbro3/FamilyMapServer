@@ -16,7 +16,9 @@ public class RegisterRequest implements Request{
     String lastName;
     String gender;
 
+
     public RegisterRequest() {}
+
 
     public String getUserName() {
         return userName;
