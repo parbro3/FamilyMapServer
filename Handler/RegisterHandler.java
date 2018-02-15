@@ -19,6 +19,8 @@ public class RegisterHandler {
 
         RegisterResult rResult = rService.service(rRequest);
 
+
+
     }
 
     /*

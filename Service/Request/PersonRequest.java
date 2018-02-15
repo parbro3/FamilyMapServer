@@ -10,6 +10,7 @@ package Service.Request;
 public class PersonRequest {
 
     public PersonRequest() {
+
     }
 
 }

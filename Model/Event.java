@@ -9,7 +9,7 @@ public class Event {
 
     private String eventID;
     private String descendant;
-    private String person;
+    private String personID;
     private String latitude;
     private String longitude;
     private String country;
@@ -40,11 +40,11 @@ public class Event {
     }
 
     public String getPerson() {
-        return person;
+        return personID;
     }
 
-    public void setPerson(String person) {
-        this.person = person;
+    public void setPerson(String personID) {
+        this.personID = personID;
     }
 
     public String getLatitude() {
