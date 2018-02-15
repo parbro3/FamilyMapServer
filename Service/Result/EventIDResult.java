@@ -1,34 +1,24 @@
-package Model;
+package Service.Result;
 
 /**
- * Represents a Model class Event in memory
- * Only getters and setters because it's a shared dataholder object
+ * Represents the EventID Result object with the appropriate message and data
+ * depending on the outcome of the EventID service.
  */
 
-public class Event {
+public class EventIDResult {
 
-    private String eventID;
-    private String descendant;
-    private String personID;
-    private String latitude;
-    private String longitude;
-    private String country;
-    private String city;
-    private String eventType;
-    private String year;
+    String descendant;
+    String eventID;
+    String personID;
+    String latitude;
+    String longitude;
+    String country;
+    String city;
+    String eventType;
+    String year;
+    String errorMessage;
 
-    /**
-     * Empty constructor to be accessed by Gson
-     */
-    Event(){}
-
-
-    public String getEventID() {
-        return eventID;
-    }
-
-    public void setEventID(String eventID) {
-        this.eventID = eventID;
+    public EventIDResult() {
     }
 
     public String getDescendant() {
@@ -39,11 +29,19 @@ public class Event {
         this.descendant = descendant;
     }
 
-    public String getPerson() {
+    public String getEventID() {
+        return eventID;
+    }
+
+    public void setEventID(String eventID) {
+        this.eventID = eventID;
+    }
+
+    public String getPersonID() {
         return personID;
     }
 
-    public void setPerson(String personID) {
+    public void setPersonID(String personID) {
         this.personID = personID;
     }
 
@@ -93,5 +91,13 @@ public class Event {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

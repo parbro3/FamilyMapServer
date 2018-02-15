@@ -1,8 +1,9 @@
 package Handler;
 
 /**
- * Created by Parker on 2/10/18.
+ * Represents the person handler object instantiated when the /person api is called
  */
+
 
 public class PersonHandler {
 }

@@ -1,7 +1,8 @@
 package Model;
 
 /**
- * Created by Parker on 2/10/18.
+ * Represents a Model class Authorization Token in memory
+ * Only getters and setters because it's a shared dataholder object
  */
 
 public class AuthToken {
@@ -9,6 +10,10 @@ public class AuthToken {
     String authID;
     String userName;
 
+    /**
+     * Empty constructor to be accessed by Gson
+     */
+    AuthToken(){}
 
     public String getAuthID() {
         return authID;
