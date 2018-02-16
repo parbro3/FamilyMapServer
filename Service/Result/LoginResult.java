@@ -5,13 +5,28 @@ package Service.Result;
  * depending on the outcome of the Login service.
  */
 
-public class LoginResult {
+public class LoginResult implements Result {
 
+    /**
+     * LoginResult's error message
+     */
     String errorMessage;
+    /**
+     * LoginResult's authorization token (UUID)
+     */
     String authToken;
+    /**
+     * LoginResult's person id (UUID)
+     */
     String personID;
+    /**
+     * LoginResult's username
+     */
     String userName;
 
+    /**
+     * Empty constructor
+     */
     public LoginResult() {
     }
 

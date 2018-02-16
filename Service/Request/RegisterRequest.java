@@ -9,14 +9,35 @@ package Service.Request;
 
 public class RegisterRequest implements Request{
 
+    /**
+     * RegisterRequest's username
+     */
     String userName;
-    String passWord;
+    /**
+     * RegisterRequest's password
+     */
+    String password;
+    /**
+     * RegisterRequest's email
+     */
     String email;
+    /**
+     * RegisterRequest's first name
+     */
     String firstName;
+    /**
+     * RegisterRequest's last name
+     */
     String lastName;
+    /**
+     * RegisterRequest's gender
+     */
     String gender;
 
 
+    /**
+     * Empty constructor
+     */
     public RegisterRequest() {}
 
 
@@ -29,11 +50,11 @@ public class RegisterRequest implements Request{
     }
 
     public String getPassWord() {
-        return passWord;
+        return password;
     }
 
     public void setPassWord(String passWord) {
-        this.passWord = passWord;
+        this.password = passWord;
     }
 
     public String getEmail() {

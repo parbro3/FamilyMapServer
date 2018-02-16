@@ -7,6 +7,9 @@ package Service.Request;
 
 public class EventRequest {
 
+    /**
+     * Empty constructor
+     */
     public EventRequest() {
     }
 

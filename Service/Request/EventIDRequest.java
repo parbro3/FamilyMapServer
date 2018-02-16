@@ -6,6 +6,9 @@ package Service.Request;
 
 public class EventIDRequest {
 
+    /**
+     * Empty constructor
+     */
     public EventIDRequest() {
     }
 }

@@ -7,7 +7,13 @@ package Model;
 
 public class AuthToken {
 
+    /**
+     * Authorization ID (UUID)
+     */
     String authID;
+    /**
+     * username that the authtoken belongs to
+     */
     String userName;
 
     /**

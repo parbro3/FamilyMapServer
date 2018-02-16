@@ -1,7 +1,5 @@
 package Model;
 
-import DAO.UserDAO;
-
 /**
  * Represents a Model class User in memory
  * Only getters and setters because it's a shared dataholder object
@@ -9,18 +7,35 @@ import DAO.UserDAO;
 
 public class User {
 
+    /**
+     * User's username
+     */
     private String userName;
+    /**
+     * User's password
+     */
     private String password;
+    /**
+     * User's email
+     */
     private String email;
+    /**
+     * User's first name
+     */
     private String firstName;
+    /**
+     * User's last name
+     */
     private String lastName;
+    /**
+     * User's gender (m or f)
+     */
     private String gender;
+    /**
+     * User's ID (UUID)
+     */
     private String personID;
 
-
-    /*
-    model, request, and result are classes that are just data holders...
-     */
 
     /**
      * Empty constructor to be accessed by Gson

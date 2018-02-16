@@ -7,9 +7,18 @@ package Service.Request;
 
 public class LoginRequest {
 
+    /**
+     * LoginRequest's username
+     */
     String userName;
-    String passWord;
+    /**
+     * LoginRequest's password
+     */
+    String password;
 
+    /**
+     * Empty constructor
+     */
     public LoginRequest() {
     }
 
@@ -22,10 +31,10 @@ public class LoginRequest {
     }
 
     public String getPassWord() {
-        return passWord;
+        return password;
     }
 
     public void setPassWord(String passWord) {
-        this.passWord = passWord;
+        this.password = passWord;
     }
 }

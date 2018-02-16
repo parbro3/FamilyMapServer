@@ -4,11 +4,21 @@ package Service.Result;
  * Represents the Event Result object with the appropriate message
  * depending on the outcome of the Event service.
  */
-public class EventResult {
+public class EventResult implements Result {
 
+    /**
+     * EventResult's error message
+     */
     String errorMessage;
+    /**
+     * EventResult's success message
+     */
     String successMessage;
 
+
+    /**
+     * Empty constructor
+     */
     public EventResult() {
     }
 

@@ -9,6 +9,9 @@ package Service.Request;
 
 public class PersonRequest {
 
+    /**
+     * Empty constructor
+     */
     public PersonRequest() {
 
     }

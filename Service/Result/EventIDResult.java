@@ -5,19 +5,53 @@ package Service.Result;
  * depending on the outcome of the EventID service.
  */
 
-public class EventIDResult {
+public class EventIDResult implements Result {
 
+    /**
+     * EventIDResult's descendant
+     */
     String descendant;
+    /**
+     * EventIDResult's event ID (UUID)
+     */
     String eventID;
+    /**
+     * EventIDResult's person ID (UUID)
+     */
     String personID;
+    /**
+     * EventIDResult's location latitude
+     */
     String latitude;
+    /**
+     * EventIDResult's location longitude
+     */
     String longitude;
+    /**
+     * EventIDResult's location country
+     */
     String country;
+    /**
+     * EventIDResult's location city
+     */
     String city;
+    /**
+     * EventIDResult's eventType
+     */
     String eventType;
+    /**
+     * EventIDResult's year
+     */
     String year;
+    /**
+     * EventIDResult's error message
+     */
     String errorMessage;
 
+
+    /**
+     * Empty constructor
+     */
     public EventIDResult() {
     }
 

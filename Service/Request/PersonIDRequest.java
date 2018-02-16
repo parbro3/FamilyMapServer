@@ -8,6 +8,9 @@ package Service.Request;
 
 public class PersonIDRequest {
 
+    /**
+     * Empty constructor
+     */
     public PersonIDRequest() {
     }
 

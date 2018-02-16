@@ -5,11 +5,21 @@ package Service.Result;
  * depending on the outcome of the clear service.
  */
 
-public class ClearResult {
+public class ClearResult implements Result {
 
+    /**
+     * ClearResult's success message
+     */
     String successMessage;
+    /**
+     * ClearResult's error message
+     */
     String errorMessage;
 
+
+    /**
+     * Empty constructor
+     */
     public ClearResult() {
     }
 
