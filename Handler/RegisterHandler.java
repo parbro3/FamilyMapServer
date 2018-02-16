@@ -17,6 +17,7 @@ public class RegisterHandler {
 
         RegisterService rService = new RegisterService();
 
+
         RegisterResult rResult = rService.service(rRequest);
 
 

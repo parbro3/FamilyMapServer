@@ -5,11 +5,12 @@
 CREATE TABLE Users
 (
     UserName varchar(255) not null primary key,
-    Password varchar(255),
-    Email varchar(255),
-    FirstName varchar(255),
-    LastName varchar(255),
-    Gender varchar(255),
+    Password varchar(255) not null,
+    Email varchar(255) not null,
+    FirstName varchar(255) not null,
+    LastName varchar(255) not null,
+    Gender varchar(255) not null check
+    constraint checkGender check(Gender in ('m','f')),
     PersonID varchar(255) not null foreign key,
 );
 
@@ -17,25 +18,25 @@ CREATE TABLE Persons
 (
     PersonID varchar(255) not null primary key,
     Descendant varchar(255) not null foreign key,
-    FirstName varchar(255),
-    LastName varchar(255),
-    Gender varchar(255),
-    FatherID varchar(255),
-    MotherID varchar(255),
-    SpouseID varchar(255),
+    FirstName varchar(255) not null,
+    LastName varchar(255) not null,
+    Gender varchar(255) not null,
+    FatherID varchar(255) not null,
+    MotherID varchar(255) not null,
+    SpouseID varchar(255) not null,
 );
 
 CREATE TABLE Events
 (
     EventID varchar(255) not null primary key,
-    Descendant varchar(255),
+    Descendant varchar(255) not null,
     PersonID varchar(255) not null foreign key,
-    Latitude varchar(255),
-    Longitude varchar(255),
-    Country varchar(255),
-    City varchar(255),
-    EventType varchar(255),
-    Year varchar(255),
+    Latitude varchar(255) not null,
+    Longitude varchar(255) not null,
+    Country varchar(255) not null,
+    City varchar(255) not null,
+    EventType varchar(255) not null,
+    Year varchar(255) not null,
 );
 
 CREATE TABLE AuthTokens
@@ -43,68 +44,3 @@ CREATE TABLE AuthTokens
     AuthID varchar(255) not null primary key,
     UserName varchar(255) not null foreign key,
 )
-
-
-    /*
-
-        User Table:
-        username - primary_key (this column must be unique)... when trying to find... do so by username because it's a primary key
-        password
-        email
-        ...
-        personID - Foreign_key (used to access other tables)
-
-
-        Person Table:
-        Descendant - foreign_key (this is an owner)
-
-        Event Table:
-        event_id - primary key
-        person_id - foreign key
-
-        AuthToken table:
-        AuthID - PK
-        userName - FK
-
-
-     */
-
--------------- EXAMPLES IN RODHAM NOTES ---------------
-
-create table members
-(
-	id integer not null primary key autoincrement,
-	name varchar(255) not null,
-	email_address varchar(255) not null
-);
-
-create table book
-(
-	id integer not null primary key autoincrement,
-	title varchar(255) not null,
-	author varchar(255) not null,
-	genre varchar(32) not null,
-	constraint ck_genre check (genre in ('Unspecified', 'Fiction', 'NonFiction', 'HistoricalFiction'))
-);
-
-
-create table reading
-(
-	member_id int not null,
-	book_id int not null
-);
-
-
-create table categories
-(
-	id integer not null primary key autoincrement,
-	name varchar(255) not null,
-	parent_id int
-);
-
-
-create table category_book
-(
-	category_id int not null,
-	book_id int not null
-);

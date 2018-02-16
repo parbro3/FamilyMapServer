@@ -9,10 +9,22 @@ package Service.Request;
 
 public class LoadRequest {
 
+    /**
+     * LoadRequest's users
+     */
     String[] users;
+    /**
+     * LoadRequest's persons
+     */
     String[] persons;
+    /**
+     * LoadRequest's events
+     */
     String[] events;
 
+    /**
+     * Empty constructor
+     */
     public LoadRequest() {
     }
 

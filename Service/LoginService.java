@@ -1,8 +1,22 @@
 package Service;
+import Service.Request.Request;
+import Service.Result.LoginResult;
 
 /**
- * Created by Parker on 2/10/18.
+ * Represents a Login Service object. Implements Service interface.
+ * Instance created by LoginHandler.
  */
 
-public class LoginService {
+public class LoginService implements Service  {
+
+    /**
+     * Brains of the login service. Verifies Request.
+     * Logs in the user and returns an auth token.
+     * @param request of type Request Interface
+     * @return Returns an LoginResult with success or error message.
+     */
+    public LoginResult service(Request request ){
+
+        return null;
+    }
 }

@@ -5,9 +5,15 @@ package Service.Result;
  * depending on the outcome of the Person service.
  */
 
-public class PersonResult {
+public class PersonResult  implements Result{
 
+    /**
+     * PersonResult's success message
+     */
     String successMessage;
+    /**
+     * PersonResult's error message
+     */
     String errorMessage;
 
     public PersonResult() {

@@ -7,6 +7,9 @@ package Service.Request;
 
 public class FillRequest {
 
+    /**
+     * Empty constructor
+     */
     public FillRequest() {}
 
 }

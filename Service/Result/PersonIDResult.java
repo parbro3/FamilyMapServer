@@ -5,18 +5,48 @@ package Service.Result;
  * depending on the outcome of the PersonID service.
  */
 
-public class PersonIDResult {
+public class PersonIDResult  implements Result{
 
+    /**
+     * PersonIDResult's descendant
+     */
     String descendant;
+    /**
+     * PersonIDResult's personID
+     */
     String personID;
+    /**
+     * PersonIDResult's first name
+     */
     String firstName;
+    /**
+     * PersonIDResult's last name
+     */
     String lastName;
+    /**
+     * PersonIDResult's gender (m or f)
+     */
     String gender;
+    /**
+     * PersonIDResult's father's id (UUID)
+     */
     String fatherID;
+    /**
+     * PersonIDResult's mother's id (UUID)
+     */
     String motherID;
+    /**
+     * PersonIDResult's spouse's id (UUID)
+     */
     String spouseID;
+    /**
+     * PersonIDResult's error message
+     */
     String errorMessage;
 
+    /**
+     * Empty constructor
+     */
     public PersonIDResult() {
     }
 

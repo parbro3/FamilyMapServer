@@ -4,11 +4,21 @@ package Service.Result;
  * Represents the Load Result object with the appropriate message
  * depending on the outcome of the Load service.
  */
-public class LoadResult {
+public class LoadResult implements Result {
 
+    /**
+     * LoadResult's success message
+     */
     String successMessage;
+    /**
+     * LoadResult's error message
+     */
     String errorMessage;
 
+
+    /**
+     * Empty constructor
+     */
     public LoadResult() {
     }
 

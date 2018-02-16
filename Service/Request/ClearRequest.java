@@ -6,6 +6,9 @@ package Service.Request;
 
 public class ClearRequest {
 
+    /**
+     * Empty constructor
+     */
     public ClearRequest() {}
 
 }

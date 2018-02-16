@@ -5,12 +5,21 @@ package Service.Result;
  * depending on the outcome of the Fill service.
  */
 
-public class FillResult {
+public class FillResult implements Result {
 
 
+    /**
+     * FillResult's success message
+     */
     String successMessage;
+    /**
+     * FillResult's error message
+     */
     String errorMessage;
 
+    /**
+     * Empty constructor
+     */
     public FillResult() {
     }
 

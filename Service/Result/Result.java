@@ -1,9 +1,9 @@
 package Service.Result;
 
 /**
- * Created by Parker on 2/13/18.
+ * Result interface implemented by all result classes
+ * for shared attributes and methods
  */
-
 public interface Result {
 
 }

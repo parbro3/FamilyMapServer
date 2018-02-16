@@ -7,13 +7,37 @@ package Model;
 
 public class Person {
 
+    /**
+     * Person's ID (UUID)
+     */
     String personID;
+    /**
+     * Person's owner/descendant
+     */
     String descendant;
+    /**
+     * Person's first name
+     */
     String firstName;
+    /**
+     * Person's last name
+     */
     String lastName;
+    /**
+     * Person's gender (m or f)
+     */
     String gender;
+    /**
+     * Person's father's ID
+     */
     String fatherID;
+    /**
+     * Person's mother's ID
+     */
     String motherID;
+    /**
+     * Person's spouse's ID
+     */
     String spouseID;
 
     /**

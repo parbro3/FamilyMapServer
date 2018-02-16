@@ -7,14 +7,41 @@ package Model;
 
 public class Event {
 
+    /**
+     * Event's ID
+     */
     private String eventID;
+    /**
+     * Event's descendant/owner
+     */
     private String descendant;
+    /**
+     * ID of the person the event belongs to
+     */
     private String personID;
+    /**
+     * Event's location latitude
+     */
     private String latitude;
+    /**
+     * Event's location longitude
+     */
     private String longitude;
+    /**
+     * Event's location country
+     */
     private String country;
+    /**
+     * Event's location city
+     */
     private String city;
+    /**
+     * Type of event
+     */
     private String eventType;
+    /**
+     * Year the event occurred
+     */
     private String year;
 
     /**

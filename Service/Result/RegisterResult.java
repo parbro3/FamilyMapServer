@@ -7,11 +7,26 @@ package Service.Result;
 
 public class RegisterResult implements Result{
 
+    /**
+     * RegisterResult's error message
+     */
     String errorMessage;
+    /**
+     * RegisterResult's authorization token
+     */
     String authToken;
+    /**
+     * RegisterResult's person id (UUID)
+     */
     String personID;
+    /**
+     * RegisterResult's username
+     */
     String userName;
 
+    /**
+     * Empty constructor
+     */
     public RegisterResult() {
     }
 

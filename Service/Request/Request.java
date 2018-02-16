@@ -1,7 +1,8 @@
 package Service.Request;
 
 /**
- * Created by Parker on 2/13/18.
+ * Request interface implemented by all request classes
+ * for shared attributes and methods
  */
 
 public interface Request {
