@@ -1,5 +1,8 @@
 package Handler;
 
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+
 import Service.*;
 import Service.Result.*;
 import Service.Request.*;
@@ -8,21 +11,23 @@ import Service.Request.*;
  * Represents the register handler object instantiated when the /register api is called
  */
 
-public class RegisterHandler {
+public class RegisterHandler implements HttpHandler{
 
-    public RegisterHandler(String[] inputTestArray) {
+    public RegisterHandler() {}
 
+    @Override
+    public void handle(HttpExchange exchange)
+    {
         RegisterRequest rRequest = new RegisterRequest();
-        rRequest.setUserName(inputTestArray[0]);
 
         RegisterService rService = new RegisterService();
 
 
         RegisterResult rResult = rService.service(rRequest);
 
-
-
     }
+
+
 
     /*
     Instantiate a RegisterService class.
