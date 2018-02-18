@@ -5,12 +5,8 @@ package Model;
  * Only getters and setters because it's a shared dataholder object
  */
 
-public class Person {
+public class Person extends Model {
 
-    /**
-     * Person's ID (UUID)
-     */
-    String personID;
     /**
      * Person's owner/descendant
      */
@@ -43,15 +39,7 @@ public class Person {
     /**
      * Empty constructor to be accessed by Gson
      */
-    Person(){}
-
-    public String getPersonID() {
-        return personID;
-    }
-
-    public void setPersonID(String personID) {
-        this.personID = personID;
-    }
+    public Person(){}
 
     public String getDescendant() {
         return descendant;

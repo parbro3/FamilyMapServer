@@ -5,7 +5,7 @@ package Model;
  * Only getters and setters because it's a shared dataholder object
  */
 
-public class User {
+public class User extends Model {
 
     /**
      * User's username
@@ -34,7 +34,7 @@ public class User {
     /**
      * User's ID (UUID)
      */
-    private String personID;
+    //private String personID;
 
 
     /**
@@ -90,6 +90,7 @@ public class User {
         this.gender = gender;
     }
 
+    /*
     public String getPersonID() {
         return personID;
     }
@@ -98,6 +99,6 @@ public class User {
         this.personID = personID;
     }
 
-
+*/
 
 }
