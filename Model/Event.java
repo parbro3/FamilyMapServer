@@ -5,12 +5,8 @@ package Model;
  * Only getters and setters because it's a shared dataholder object
  */
 
-public class Event {
+public class Event extends Model {
 
-    /**
-     * Event's ID
-     */
-    private String eventID;
     /**
      * Event's descendant/owner
      */
@@ -47,16 +43,7 @@ public class Event {
     /**
      * Empty constructor to be accessed by Gson
      */
-    Event(){}
 
-
-    public String getEventID() {
-        return eventID;
-    }
-
-    public void setEventID(String eventID) {
-        this.eventID = eventID;
-    }
 
     public String getDescendant() {
         return descendant;
