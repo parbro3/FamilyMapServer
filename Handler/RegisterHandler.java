@@ -1,11 +1,8 @@
 package Handler;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-
-import Service.*;
-import Service.Result.*;
-import Service.Request.*;
+import com.sun.net.httpserver.*;
+import com.google.gson.*;
+import Service.Request.RegisterRequest;
 
 /**
  * Represents the register handler object instantiated when the /register api is called
@@ -18,18 +15,46 @@ public class RegisterHandler implements HttpHandler{
     @Override
     public void handle(HttpExchange exchange)
     {
-        RegisterRequest rRequest = new RegisterRequest();
+        Boolean success = false;
 
-        RegisterService rService = new RegisterService();
+        try
+        {
+            //check for post... should be post
+            if(exchange.getRequestMethod().toLowerCase().equals("post"))
+            {
+                Headers reqHeaders = exchange.getRequestHeaders();
+                //String body = exchange.getRequestBody();
+
+                //check for authorization header... if it needs authorization
+                //which registration doesn't need one... it returns one...
+
+                //probably first create a register request out of it
+                RegisterRequest rRequest = new RegisterRequest();
+
+                //using Gson... make the request.
 
 
-        RegisterResult rResult = rService.service(rRequest);
+
+            }
+        }
+        catch(Exception e)
+        {
+
+        }
 
     }
 
 
 
     /*
+
+    RegisterRequest rRequest = new RegisterRequest();
+
+    RegisterService rService = new RegisterService();
+
+
+    RegisterResult rResult = rService.service(rRequest);
+
     Instantiate a RegisterService class.
     call RegisterService.register();
 

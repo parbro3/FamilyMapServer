@@ -4,7 +4,12 @@ import Service.Result.PersonResult;
 
 /**
  * Represents a Person Service object. Implements Service interface.
- * Instance created by PersonHandler.
+ * Instance created by PersonHandler. Brains of the api call.
+ * Verifies Request. Returns ALL family members of the current user.
+ * The current user is determined from the provided auth token.
+ *
+ * Service method takes an object that implements "request" as a parameter and returns an object
+ * of that implements "result."
  */
 
 public class PersonService implements Service  {

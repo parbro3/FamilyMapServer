@@ -53,5 +53,15 @@ public class PersonDAO {
         return true;
     }
 
+    /**
+     * Takes in a personID string and checks the database for that person. The
+     * function will then return all the family members of the person.
+     * @param personID
+     * @return
+     */
+    public Person[] readPersonsFamily(String personID)
+    {
+        return null;
+    }
 
 }

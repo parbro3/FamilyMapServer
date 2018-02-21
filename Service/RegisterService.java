@@ -5,7 +5,13 @@ import Service.Request.*;
 
 /**
  * Represents a Register Service object. Implements Service interface.
- * Instance created by RegisterHandler.
+ * Instance created by RegisterHandler. The Brains of the api call.
+ * Creates a new user account, generates 4 generations
+ * of ancestor data for the new user, logs the user in,
+ * and returns an auth token.
+ *
+ * Service method takes an object that implements "request" as a parameter and returns an object
+ * of that implements "result."
  */
 
 public class RegisterService implements Service{
