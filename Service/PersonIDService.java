@@ -7,6 +7,8 @@ import Service.Result.PersonIDResult;
  * Instance created by PersonIDHandler. Brains of the api call.
  * Verifies Request. Returns the single Person object with the specified ID.
  *
+ * Connection between PersonIDHandler and DAO classes
+ *
  * Service method takes an object that implements "request" as a parameter and returns an object
  * of that implements "result."
  */

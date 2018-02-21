@@ -9,6 +9,8 @@ import Service.Request.Request;
  * the current user. The current user is determined
  * from the provided auth token.
  *
+ * Connection between EventHandler and DAO classes
+ *
  * Service method takes an object that implements "request" as a parameter and returns an object
  * of that implements "result."
  */

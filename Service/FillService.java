@@ -15,6 +15,8 @@ import Service.Request.Request;
  * (the default is 4, which results in 31 new persons each with
  * associated events).
  *
+ * Connection between FillHandler and DAO classes
+ *
  * Service method takes an object that implements "request" as a parameter and returns an object
  * of that implements "result."
  */

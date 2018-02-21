@@ -7,6 +7,8 @@ import Service.Request.Request;
  * Instance created by EventIDHandler. Brains of the api call.
  * Verifies Request. Returns the single Event object with the specified ID.
  *
+ * Connection between EventIDHandler and DAO classes
+ *
  * Service method takes an object that implements "request" as a parameter and returns an object
  * of that implements "result."
  */
