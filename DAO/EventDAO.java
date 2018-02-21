@@ -55,5 +55,15 @@ public class EventDAO {
     {
         return true;
     }
-}
 
+
+    /**
+     * Takes in the userid of the current user as a string and looks in the database
+     * to find all other family members of the current user and returns the events
+     * belonging to those family members
+     * @param UserID
+     * @return
+     */
+    public Event[] readEventFamily(String UserID) { return null; }
+
+}

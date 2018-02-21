@@ -4,7 +4,11 @@ import Service.Result.PersonIDResult;
 
 /**
  * Represents a PersonID Service object. Implements Service interface.
- * Instance created by PersonIDHandler.
+ * Instance created by PersonIDHandler. Brains of the api call.
+ * Verifies Request. Returns the single Person object with the specified ID.
+ *
+ * Service method takes an object that implements "request" as a parameter and returns an object
+ * of that implements "result."
  */
 public class PersonIDService implements Service  {
 

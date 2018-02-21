@@ -4,7 +4,11 @@ import Service.Result.LoginResult;
 
 /**
  * Represents a Login Service object. Implements Service interface.
- * Instance created by LoginHandler.
+ * Instance created by LoginHandler. Brains of the api call.
+ * Verifies Request. Logs in the user and returns an auth token.
+ *
+ * Service method takes an object that implements "request" as a parameter and returns an object
+ * of that implements "result."
  */
 
 public class LoginService implements Service  {
