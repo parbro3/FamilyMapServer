@@ -62,7 +62,7 @@ public class EventDAO {
      * to find all other family members of the current user and returns the events
      * belonging to those family members
      * @param UserID
-     * @return
+     * @return Event[] array of Events
      */
     public Event[] readEventFamily(String UserID) { return null; }
 

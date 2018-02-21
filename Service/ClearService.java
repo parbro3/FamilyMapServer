@@ -9,6 +9,8 @@ import Service.Result.ClearResult;
  * Verifies Request. Calls EventDAO and other necessary DAO objects
  * to add and modify tables.
  *
+ * Connection between ClearHandler and DAO classes
+ *
  * Service method takes an object that implements "request" as a parameter and returns an object
  * of that implements "result."
  */

@@ -7,6 +7,8 @@ import Service.Result.LoginResult;
  * Instance created by LoginHandler. Brains of the api call.
  * Verifies Request. Logs in the user and returns an auth token.
  *
+ * Connection between LoginHandler and DAO classes
+ *
  * Service method takes an object that implements "request" as a parameter and returns an object
  * of that implements "result."
  */

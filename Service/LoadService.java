@@ -9,6 +9,8 @@ import Service.Result.LoadResult;
  * the /clear API), and then loads the posted user,
  * person, and event data into the database.
  *
+ * Connection between LoadHandler and DAO classes
+ *
  * Service method takes an object that implements "request" as a parameter and returns an object
  * of that implements "result."
  */

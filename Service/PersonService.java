@@ -8,6 +8,8 @@ import Service.Result.PersonResult;
  * Verifies Request. Returns ALL family members of the current user.
  * The current user is determined from the provided auth token.
  *
+ * Connection between PersonHandler and DAO classes
+ *
  * Service method takes an object that implements "request" as a parameter and returns an object
  * of that implements "result."
  */

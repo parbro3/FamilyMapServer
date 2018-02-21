@@ -10,6 +10,8 @@ import Service.Request.*;
  * of ancestor data for the new user, logs the user in,
  * and returns an auth token.
  *
+ * Connection between RegisterHandler and DAO classes
+ *
  * Service method takes an object that implements "request" as a parameter and returns an object
  * of that implements "result."
  */
