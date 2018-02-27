@@ -7,7 +7,7 @@ import Model.Event;
  * Methods access event table in database.
  */
 
-public class EventDAO {
+public class EventDAO extends DAO {
 
     /**
      * Empty constructor to be accessed by Gson
