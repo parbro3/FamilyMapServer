@@ -6,6 +6,7 @@ import Model.User;
 import java.sql.*;
 import java.util.*;
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Represents an User data access object
@@ -91,7 +92,6 @@ public class UserDAO {
             stmt.setString(7, user.getID());
 
 
-
             //if it inserted a row.
             if (stmt.executeUpdate() == 1)
             {
@@ -123,25 +123,78 @@ public class UserDAO {
      * @param userName String username
      * @return returns Model User if user is found in database
      */
-    public User readUser(String userName) { return null; }
+    public User readUser(String userName) throws SQLException
+    {
+        String sql = "select UserName, Password, Email, FirstName, LastName, Gender, PersonID from Users" +
+                " where Users.UserName = ?";
+
+        stmt = connection.prepareStatement(sql);
+        stmt.setString(1, userName);
+
+        keyRS = stmt.executeQuery();
+
+        ArrayList<User> queryUsers = new ArrayList();
+
+        while(keyRS.next())
+        {
+            User user = new User();
+            user.setUserName(keyRS.getString(1));
+            user.setPassword(keyRS.getString(2));
+            user.setEmail(keyRS.getString(3));
+            user.setFirstName(keyRS.getString(4));
+            user.setLastName(keyRS.getString(5));
+            user.setGender(keyRS.getString(6));
+            user.setID(keyRS.getString(7));
+
+            queryUsers.add(user);
+        }
+
+        if(queryUsers.size() == 1)
+        {
+            System.out.print("User found!");
+            return queryUsers.get(0);
+        }
+        System.out.print("User not found!");
+        return null;
+    }
+
+    /**
+     * Takes in a username string to delete a specific user from the database
+     * @param userName string is passed in
+     * @return Returns a true boolean if the user was deleted
+     */
+    public Boolean deleteUser(String userName) throws SQLException
+    {
+        String sql = "delete from Users where UserName = ?";
+        stmt = connection.prepareStatement(sql);
+        stmt.setString(1, userName);
+
+        if(stmt.executeUpdate() == 1)
+        {
+            System.out.print("Delete Successful!");
+            return true;
+        }
+        System.out.print("User not found!");
+        return false;
+    }
 
     /**
      * Deletes all users from database and returns a true boolean if the request succeeded
      * @return returns true if the request succeeded
      */
-    public Boolean deleteAllUsers()
+    public Boolean deleteAllUsers() throws SQLException
     {
-        return true;
-    }
+        String sql = "delete from Users";
+        stmt = connection.prepareStatement(sql);
 
-    /**
-     * Takes in a username string to delete a specific user from the database
-     * @param username string is passed in
-     * @return Returns a true boolean if the user was deleted
-     */
-    public Boolean deleteUser(String username)
-    {
-        return true;
+        if(stmt.executeUpdate() > 0)
+        {
+            System.out.print("Delete successful!");
+            return true;
+        }
+
+        System.out.print("Delete unsuccessful");
+        return false;
     }
 
 
