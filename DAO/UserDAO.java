@@ -1,11 +1,7 @@
 package DAO;
 
-import android.database.DatabaseErrorHandler;
-
 import Model.User;
 import java.sql.*;
-import java.util.*;
-import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -13,58 +9,18 @@ import java.util.ArrayList;
  * Methods access User table in database.
  */
 
-public class UserDAO {
+public class UserDAO extends DAO {
 
     PreparedStatement stmt = null;
     Statement keyStmt = null;
     ResultSet keyRS = null;
-    Connection connection = null;
 
     /**
      * Empty constructor for Gson compatibility
      */
     public UserDAO()
     {
-        try {
-            final String driver = "org.sqlite.JDBC";
-            Class.forName(driver);
-        }
-        catch(ClassNotFoundException e) {
-            System.out.print(e.getMessage());
-        }
-    }
-
-    public void openConnection()
-    {
-        String dbName = "FMDB.db";
-        String connectionURL = "jdbc:sqlite:" + dbName;
-
-        try {
-            // Open a database connection
-            connection = DriverManager.getConnection(connectionURL);
-            // Start a transaction
-            connection.setAutoCommit(false);
-        }
-        catch (SQLException e) {
-            System.out.print(e.getMessage());
-        }
-    }
-
-    public void closeConnection(boolean commit) {
-        try {
-            if (commit) {
-                connection.commit();
-            }
-            else {
-                connection.rollback();
-            }
-
-            connection.close();
-            connection = null;
-        }
-        catch (SQLException e) {
-            System.out.print(e.getMessage());
-        }
+        super();
     }
 
 
@@ -196,24 +152,5 @@ public class UserDAO {
         System.out.print("Delete unsuccessful");
         return false;
     }
-
-
-
-
-    /*
-    UserDAO
-    booleanMaybe? addUser(User u)
-
-    User findUser(String userName);
-    CRUD
-
-    boolean deleteAllUsers();
-
-    don't have single delete or update functions...
-
-    //get everything you anticipate having as methods in the javadocs
-     */
-
-
 
 }

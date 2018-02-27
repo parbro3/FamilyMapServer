@@ -7,7 +7,7 @@ import Model.AuthToken;
  * Methods access AuthToken table in database.
  */
 
-public class AuthTokenDAO {
+public class AuthTokenDAO extends DAO {
 
     /**
      * Empty constructor to be accessed by Gson

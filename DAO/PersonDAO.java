@@ -7,7 +7,7 @@ import Model.Person;
  * Methods access Person table in database.
  */
 
-public class PersonDAO {
+public class PersonDAO extends DAO {
 
     /**
      * Empty constructor to be accessed by Gson
