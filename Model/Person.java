@@ -41,6 +41,26 @@ public class Person extends Model {
      */
     public Person(){}
 
+    //personID needs to be generated.. doesn't include father, mother, spouse id because they are optional
+    public Person(String descendant, String firstName, String lastName, String gender)
+    {
+        this.descendant = descendant;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.setID(this.generateID());
+    }
+
+    //with already created personID.. doesn't include father, mother, spouse id because they are optional
+    public Person(String descendant, String firstName, String lastName, String gender, String personID)
+    {
+        this.descendant = descendant;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.setID(personID);
+    }
+
     public String getDescendant() {
         return descendant;
     }
