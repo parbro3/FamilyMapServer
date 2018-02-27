@@ -9,39 +9,42 @@ CREATE TABLE Users
     Email varchar(255) not null,
     FirstName varchar(255) not null,
     LastName varchar(255) not null,
-    Gender varchar(255) not null check
-    constraint checkGender check(Gender in ('m','f')),
-    PersonID varchar(255) not null foreign key,
+    Gender varchar(255) not null,
+    PersonID varchar(255) not null,
+    constraint checkGender check(Gender in ('m','f'))
 );
 
 CREATE TABLE Persons
 (
     PersonID varchar(255) not null primary key,
-    Descendant varchar(255) not null foreign key,
+    Descendant varchar(255) not null,
     FirstName varchar(255) not null,
     LastName varchar(255) not null,
     Gender varchar(255) not null,
     FatherID varchar(255),
     MotherID varchar(255),
     SpouseID varchar(255),
+	foreign key (Descendant) references Users(UserName)
 );
 
 CREATE TABLE Events
 (
     EventID varchar(255) not null primary key,
     Descendant varchar(255) not null,
-    PersonID varchar(255) not null foreign key,
+    PersonID varchar(255) not null,
     Latitude real not null,
     Longitude real not null,
     Country varchar(255) not null,
     City varchar(255) not null,
     EventType varchar(255) not null,
-    Year integer not null,
+    EventYear integer not null,
+	foreign key (PersonID) references Persons(PersonID)
 );
 
 
 CREATE TABLE AuthTokens
 (
     AuthID varchar(255) not null primary key,
-    UserName varchar(255) not null foreign key,
+    UserName varchar(255) not null,
+	foreign key (UserName) references Users(UserName)
 )
