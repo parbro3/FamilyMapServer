@@ -1,5 +1,10 @@
 package DAO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import Model.Event;
 
 /**
@@ -7,12 +12,17 @@ import Model.Event;
  * Methods access event table in database.
  */
 
-public class EventDAO extends DAO {
+public class EventDAO {
+
+    PreparedStatement stmt = null;
+    Statement keyStmt = null;
+    ResultSet keyRS = null;
+    private Connection connection = null;
 
     /**
      * Empty constructor to be accessed by Gson
      */
-    public EventDAO(){}
+    protected EventDAO(){}
 
     /**
      * Takes in a Model Event object with all information
@@ -66,4 +76,8 @@ public class EventDAO extends DAO {
      */
     public Event[] readEventFamily(String UserID) { return null; }
 
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
 }

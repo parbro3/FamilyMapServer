@@ -9,20 +9,17 @@ import java.util.ArrayList;
  * Methods access User table in database.
  */
 
-public class UserDAO extends DAO {
+public class UserDAO {
 
     PreparedStatement stmt = null;
     Statement keyStmt = null;
     ResultSet keyRS = null;
+    private Connection connection = null;
 
     /**
      * Empty constructor for Gson compatibility
      */
-    public UserDAO()
-    {
-        super();
-    }
-
+    protected UserDAO(){}
 
     /**
      * Takes in a Model User object with all information
@@ -51,17 +48,17 @@ public class UserDAO extends DAO {
             //if it inserted a row.
             if (stmt.executeUpdate() == 1)
             {
-                System.out.print("Insert successful!");
+                System.out.print("Insert User successful!");
                 success = true;
             }
         }
         catch (SQLException e)
         {
-            System.out.print("SQL Exception: " + e.getMessage());
+            System.out.print("User Insert SQL Exception: " + e.getMessage());
         }
         catch (Exception e)
         {
-            System.out.print("General Exception: " + e.getMessage());
+            System.out.print("User Insert General Exception: " + e.getMessage());
         }
         finally
         {
@@ -153,4 +150,7 @@ public class UserDAO extends DAO {
         return false;
     }
 
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
 }

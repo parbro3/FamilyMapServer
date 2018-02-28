@@ -1,5 +1,10 @@
 package DAO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import Model.AuthToken;
 
 /**
@@ -7,12 +12,17 @@ import Model.AuthToken;
  * Methods access AuthToken table in database.
  */
 
-public class AuthTokenDAO extends DAO {
+public class AuthTokenDAO {
+
+    PreparedStatement stmt = null;
+    Statement keyStmt = null;
+    ResultSet keyRS = null;
+    private Connection connection = null;
 
     /**
      * Empty constructor to be accessed by Gson
      */
-    public AuthTokenDAO(){}
+    protected AuthTokenDAO(){}
 
     /**
      * Takes in a Model Event object with all information
@@ -54,5 +64,9 @@ public class AuthTokenDAO extends DAO {
     public Boolean deleteAuthToken(String authID)
     {
         return true;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 }
