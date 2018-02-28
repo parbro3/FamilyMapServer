@@ -1,5 +1,6 @@
 package DAO;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,19 +14,17 @@ import Model.Person;
  * Methods access Person table in database.
  */
 
-public class PersonDAO extends DAO {
+public class PersonDAO {
 
     PreparedStatement stmt = null;
     Statement keyStmt = null;
     ResultSet keyRS = null;
+    private Connection connection = null;
 
     /**
      * Empty constructor to be accessed by Gson
      */
-    public PersonDAO()
-    {
-        super();
-    }
+    protected PersonDAO() {}
 
     /**
      * Takes in a Model Person object with all information
@@ -201,5 +200,8 @@ public class PersonDAO extends DAO {
         return null;
     }
 
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
 }
 
