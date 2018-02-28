@@ -7,10 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Model.Person;
-import java.sql.*;
-import java.util.ArrayList;
-
-import Model.Person;
 
 /**
  * Represents a Person data access object
@@ -59,17 +55,17 @@ public class PersonDAO extends DAO {
             //if it inserted a row.
             if (stmt.executeUpdate() == 1)
             {
-                System.out.print("Insert successful!");
+                System.out.print("Insert Person successful!");
                 success = true;
             }
         }
         catch (SQLException e)
         {
-            System.out.print("SQL Exception: " + e.getMessage());
+            System.out.print("Person Insert SQL Exception: " + e.getMessage());
         }
         catch (Exception e)
         {
-            System.out.print("General Exception: " + e.getMessage());
+            System.out.print("Person Insert General Exception: " + e.getMessage());
         }
         finally
         {
@@ -165,11 +161,43 @@ public class PersonDAO extends DAO {
     /**
      * Takes in a personID string and checks the database for that person. The
      * function will then return all the family members of the person.
-     * @param personID
+     * @param userID
      * @return Person[] Array of Persons
      */
-    public Person[] readPersonsFamily(String personID)
+    public ArrayList<Person> readPersonsFamily(String userID) throws SQLException
     {
+        //this would definitely have to be recursive if
+        String sql = "select PersonID, Descendant, FirstName, LastName, Gender, FatherID, MotherID, SpouseID from Persons" +
+                " where Persons.Descendant = ?";
+
+        stmt = connection.prepareStatement(sql);
+        stmt.setString(1, userID);
+
+        keyRS = stmt.executeQuery();
+
+        ArrayList<Person> queryPersons = new ArrayList();
+
+        while(keyRS.next())
+        {
+            Person person = new Person();
+            person.setID(keyRS.getString(1));
+            person.setDescendant(keyRS.getString(2));
+            person.setFirstName(keyRS.getString(4));
+            person.setLastName(keyRS.getString(5));
+            person.setGender(keyRS.getString(6));
+            person.setFatherID(keyRS.getString(7));
+            person.setMotherID(keyRS.getString(7));
+            person.setSpouseID(keyRS.getString(7));
+
+            queryPersons.add(person);
+        }
+
+        if(queryPersons.size() > 0)
+        {
+            System.out.print("Family members found!");
+            return queryPersons;
+        }
+        System.out.print("No family members found!");
         return null;
     }
 

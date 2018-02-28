@@ -51,17 +51,17 @@ public class UserDAO extends DAO {
             //if it inserted a row.
             if (stmt.executeUpdate() == 1)
             {
-                System.out.print("Insert successful!");
+                System.out.print("Insert User successful!");
                 success = true;
             }
         }
         catch (SQLException e)
         {
-            System.out.print("SQL Exception: " + e.getMessage());
+            System.out.print("User Insert SQL Exception: " + e.getMessage());
         }
         catch (Exception e)
         {
-            System.out.print("General Exception: " + e.getMessage());
+            System.out.print("User Insert General Exception: " + e.getMessage());
         }
         finally
         {
