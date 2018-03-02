@@ -61,10 +61,12 @@ public class PersonDAO {
         catch (SQLException e)
         {
             System.out.print("Person Insert SQL Exception: " + e.getMessage());
+            connection.rollback();
         }
         catch (Exception e)
         {
             System.out.print("Person Insert General Exception: " + e.getMessage());
+            connection.rollback();
         }
         finally
         {
@@ -84,37 +86,54 @@ public class PersonDAO {
      */
     public Person readPerson(String personID) throws SQLException
     {
-        String sql = "select PersonID, Descendant, FirstName, LastName, Gender, FatherID, MotherID, SpouseID from Persons" +
-                " where Persons.PersonID = ?";
-
-        stmt = connection.prepareStatement(sql);
-        stmt.setString(1, personID);
-
-        keyRS = stmt.executeQuery();
-
-        ArrayList<Person> queryPersons = new ArrayList();
-
-        while(keyRS.next())
+        try
         {
-            Person person = new Person();
-            person.setID(keyRS.getString(1));
-            person.setDescendant(keyRS.getString(2));
-            person.setFirstName(keyRS.getString(4));
-            person.setLastName(keyRS.getString(5));
-            person.setGender(keyRS.getString(6));
-            person.setFatherID(keyRS.getString(7));
-            person.setMotherID(keyRS.getString(7));
-            person.setSpouseID(keyRS.getString(7));
+            String sql = "select PersonID, Descendant, FirstName, LastName, Gender, FatherID, MotherID, SpouseID from Persons" +
+                    " where Persons.PersonID = ?";
 
-            queryPersons.add(person);
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, personID);
+
+            keyRS = stmt.executeQuery();
+
+            ArrayList<Person> queryPersons = new ArrayList();
+
+            while (keyRS.next()) {
+                Person person = new Person();
+                person.setID(keyRS.getString(1));
+                person.setDescendant(keyRS.getString(2));
+                person.setFirstName(keyRS.getString(4));
+                person.setLastName(keyRS.getString(5));
+                person.setGender(keyRS.getString(6));
+                person.setFatherID(keyRS.getString(7));
+                person.setMotherID(keyRS.getString(7));
+                person.setSpouseID(keyRS.getString(7));
+
+                queryPersons.add(person);
+            }
+
+            if (queryPersons.size() == 1) {
+                System.out.print("Person found!");
+                return queryPersons.get(0);
         }
-
-        if(queryPersons.size() == 1)
+            System.out.print("Person not found!");
+        }
+        catch(SQLException e)
         {
-            System.out.print("Person found!");
-            return queryPersons.get(0);
+            System.out.print(e.getMessage());
+            connection.rollback();
         }
-        System.out.print("Person not found!");
+        catch(Exception e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
         return null;
     }
 
@@ -124,16 +143,33 @@ public class PersonDAO {
      */
     public Boolean deleteAllPersons() throws SQLException
     {
-        String sql = "delete from Persons";
-        stmt = connection.prepareStatement(sql);
+        try {
+            String sql = "delete from Persons";
+            stmt = connection.prepareStatement(sql);
 
-        if(stmt.executeUpdate() > 0)
-        {
-            System.out.print("Delete successful!");
-            return true;
+            if (stmt.executeUpdate() > 0) {
+                System.out.print("Delete successful!");
+                return true;
+            }
+
+            System.out.print("Delete unsuccessful");
         }
-
-        System.out.print("Delete unsuccessful");
+        catch(SQLException e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        catch(Exception e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
         return false;
     }
 
@@ -144,16 +180,33 @@ public class PersonDAO {
      */
     public Boolean deletePerson(String personID) throws SQLException
     {
-        String sql = "delete from Persons where PersonID = ?";
-        stmt = connection.prepareStatement(sql);
-        stmt.setString(1, personID);
+        try {
+            String sql = "delete from Persons where PersonID = ?";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, personID);
 
-        if(stmt.executeUpdate() == 1)
-        {
-            System.out.print("Delete Successful!");
-            return true;
+            if (stmt.executeUpdate() == 1) {
+                System.out.print("Delete Successful!");
+                return true;
+            }
+            System.out.print("Person not found!");
         }
-        System.out.print("Person not found!");
+        catch(SQLException e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        catch(Exception e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
         return false;
     }
 
@@ -165,38 +218,54 @@ public class PersonDAO {
      */
     public ArrayList<Person> readPersonsFamily(String userID) throws SQLException
     {
-        //this would definitely have to be recursive if
-        String sql = "select PersonID, Descendant, FirstName, LastName, Gender, FatherID, MotherID, SpouseID from Persons" +
-                " where Persons.Descendant = ?";
+        try {
+            //this would definitely have to be recursive if
+            String sql = "select PersonID, Descendant, FirstName, LastName, Gender, FatherID, MotherID, SpouseID from Persons" +
+                    " where Persons.Descendant = ?";
 
-        stmt = connection.prepareStatement(sql);
-        stmt.setString(1, userID);
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, userID);
 
-        keyRS = stmt.executeQuery();
+            keyRS = stmt.executeQuery();
 
-        ArrayList<Person> queryPersons = new ArrayList();
+            ArrayList<Person> queryPersons = new ArrayList();
 
-        while(keyRS.next())
-        {
-            Person person = new Person();
-            person.setID(keyRS.getString(1));
-            person.setDescendant(keyRS.getString(2));
-            person.setFirstName(keyRS.getString(4));
-            person.setLastName(keyRS.getString(5));
-            person.setGender(keyRS.getString(6));
-            person.setFatherID(keyRS.getString(7));
-            person.setMotherID(keyRS.getString(7));
-            person.setSpouseID(keyRS.getString(7));
+            while (keyRS.next()) {
+                Person person = new Person();
+                person.setID(keyRS.getString(1));
+                person.setDescendant(keyRS.getString(2));
+                person.setFirstName(keyRS.getString(4));
+                person.setLastName(keyRS.getString(5));
+                person.setGender(keyRS.getString(6));
+                person.setFatherID(keyRS.getString(7));
+                person.setMotherID(keyRS.getString(7));
+                person.setSpouseID(keyRS.getString(7));
 
-            queryPersons.add(person);
+                queryPersons.add(person);
+            }
+
+            if (queryPersons.size() > 0) {
+                System.out.print("Family members found!");
+                return queryPersons;
+            }
+            System.out.print("No family members found!");
         }
-
-        if(queryPersons.size() > 0)
+        catch(SQLException e)
         {
-            System.out.print("Family members found!");
-            return queryPersons;
+            System.out.print(e.getMessage());
+            connection.rollback();
         }
-        System.out.print("No family members found!");
+        catch(Exception e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
         return null;
     }
 

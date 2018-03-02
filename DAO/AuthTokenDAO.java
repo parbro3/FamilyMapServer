@@ -1,11 +1,9 @@
 package DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 import Model.AuthToken;
+import java.util.ArrayList;
 
 /**
  * Represents an AuthToken data access object
@@ -31,9 +29,42 @@ public class AuthTokenDAO {
      * @param authToken Model Event
      * @return true if the event insert succeeded
      */
-    public Boolean createAuthToken(AuthToken authToken)
+    public Boolean createAuthToken(AuthToken authToken) throws SQLException
     {
-        return true;
+        Boolean success = false;
+        try
+        {
+            String sql = "insert into AuthTokens (AuthTokenID, UserName)" +
+                    " values (?, ?)";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, authToken.getID());
+            stmt.setString(2, authToken.getUserName());
+
+            //if it inserted a row.
+            if (stmt.executeUpdate() == 1)
+            {
+                System.out.print("Insert AuthToken successful!");
+                success = true;
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.print("AuthToken Insert SQL Exception: " + e.getMessage());
+            connection.rollback();
+        }
+        catch (Exception e)
+        {
+            System.out.print("AuthToken Insert General Exception: " + e.getMessage());
+            connection.rollback();
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
+
+        return success;
     }
 
     /**
@@ -42,8 +73,49 @@ public class AuthTokenDAO {
      * @param AuthID String
      * @return returns Model AuthToken if user is found in database
      */
-    public AuthToken readAuthToken(String AuthID)
+    public AuthToken readAuthToken(String AuthID) throws SQLException
     {
+        try {
+            String sql = "select AuthTokenID, UserName from AuthTokens" +
+                    " where AuthTokens.AuthTokenID = ?";
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, AuthID);
+
+            keyRS = stmt.executeQuery();
+
+            ArrayList<AuthToken> queryUsers = new ArrayList();
+
+            while (keyRS.next()) {
+                AuthToken authToken = new AuthToken();
+                authToken.setID(keyRS.getString(1));
+                authToken.setUserName(keyRS.getString(2));
+
+                queryUsers.add(authToken);
+            }
+
+            if (queryUsers.size() == 1) {
+                System.out.print("AuthToken found!");
+                return queryUsers.get(0);
+            }
+            System.out.print("AuthToken not found!");
+        }
+        catch(SQLException e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        catch(Exception e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
         return null;
     }
 
@@ -51,9 +123,36 @@ public class AuthTokenDAO {
      * Deletes all AuthTokens from database and returns a true boolean if the request succeeded
      * @return returns true if the request succeeded
      */
-    public Boolean deleteAllAuthTokens()
+    public Boolean deleteAllAuthTokens() throws SQLException
     {
-        return true;
+        try {
+            String sql = "delete from AuthTokens";
+            stmt = connection.prepareStatement(sql);
+
+            if (stmt.executeUpdate() > 0) {
+                System.out.print("Delete successful!");
+                return true;
+            }
+
+            System.out.print("Delete unsuccessful");
+        }
+        catch(SQLException e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        catch(Exception e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
+        return false;
     }
 
     /**
@@ -61,9 +160,36 @@ public class AuthTokenDAO {
      * @param authID string is passed in
      * @return Returns a true boolean if the authToken was deleted
      */
-    public Boolean deleteAuthToken(String authID)
+    public Boolean deleteAuthToken(String authID) throws SQLException
     {
-        return true;
+        try {
+            String sql = "delete from AuthTokens where AuthTokenID = ?";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, authID);
+
+            if (stmt.executeUpdate() == 1) {
+                System.out.print("Delete Successful!");
+                return true;
+            }
+            System.out.print("AuthToken not found!");
+        }
+        catch(SQLException e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        catch(Exception e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
+        return false;
     }
 
     public void setConnection(Connection connection) {

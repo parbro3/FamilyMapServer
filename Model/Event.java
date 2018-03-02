@@ -44,6 +44,19 @@ public class Event extends Model {
      * Empty constructor to be accessed by Gson
      */
 
+    public Event(){}
+
+    public Event(String descendant, String personID, String latitude, String longitude, String country, String city, String eventType, String year) {
+        this.descendant = descendant;
+        this.personID = personID;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.country = country;
+        this.city = city;
+        this.eventType = eventType;
+        this.year = year;
+        this.setID(this.generateID());
+    }
 
     public String getDescendant() {
         return descendant;

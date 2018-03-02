@@ -44,7 +44,7 @@ CREATE TABLE Events
 
 CREATE TABLE AuthTokens
 (
-    AuthID varchar(255) not null primary key,
+    AuthTokenID varchar(255) not null primary key,
     UserName varchar(255) not null,
 	foreign key (UserName) references Users(UserName)
 )

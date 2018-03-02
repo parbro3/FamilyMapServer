@@ -1,15 +1,12 @@
 package DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 import Model.Event;
+import java.sql.*;
+import java.util.ArrayList;
 
 /**
- * Represents an Event data access object
- * Methods access event table in database.
+ * Represents an User data access object
+ * Methods access User table in database.
  */
 
 public class EventDAO {
@@ -20,61 +17,247 @@ public class EventDAO {
     private Connection connection = null;
 
     /**
-     * Empty constructor to be accessed by Gson
+     * Empty constructor for Gson compatibility
      */
     protected EventDAO(){}
 
     /**
-     * Takes in a Model Event object with all information
+     * Takes in a Event object with all information
      * and inserts the information into the database. The function returns
      * true if the method succeeded.
      * @param event Model Event
      * @return true if the event insert succeeded
      */
-    public Boolean createEvent(Event event)
+    public Boolean createEvent(Event event) throws SQLException
     {
-        return true;
+        Boolean success = false;
+        try
+        {
+            String sql = "insert into Events (EventID, Descendant, PersonID, Latitude, Longitude, Country, City, EventType, EventYear)" +
+                    " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, event.getID());
+            stmt.setString(2, event.getDescendant());
+            stmt.setString(3, event.getPerson());
+            stmt.setString(4, event.getLatitude());
+            stmt.setString(5, event.getLongitude());
+            stmt.setString(6, event.getCountry());
+            stmt.setString(7, event.getCity());
+            stmt.setString(8, event.getEventType());
+            stmt.setString(9, event.getYear());
+
+            //if it inserted a row.
+            if (stmt.executeUpdate() == 1)
+            {
+                System.out.print("Insert Event successful!");
+                success = true;
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.print("Event Insert SQL Exception: " + e.getMessage());
+            connection.rollback();
+        }
+        catch (Exception e)
+        {
+            System.out.print("Event Insert General Exception: " + e.getMessage());
+            connection.rollback();;
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
+
+        return success;
     }
 
     /**
-     * Takes in a eventID as a string and checks the database for that event
-     * which is the primary key. The function returns the Event object.
-     * @param eventID String
+     * Takes in a eventID as a string and checks the database for that user
+     * which is the primary key. The function returns the User object.
+     * @param eventID String username
      * @return returns Model Event if user is found in database
      */
-    public Event readEvent(String eventID)
+    public Event readEvent(String eventID) throws SQLException
     {
+        try {
+            String sql = "select EventID, Descendant, PersonID, Latitude, Longitude, Country, City, EventType, EventYear from Events" +
+                    " where Events.EventID = ?";
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, eventID);
+
+            keyRS = stmt.executeQuery();
+
+            ArrayList<Event> queryEvents = new ArrayList();
+
+            while (keyRS.next()) {
+                Event event = new Event();
+                event.setDescendant(keyRS.getString(1));
+                event.setPerson(keyRS.getString(2));
+                event.setLatitude(keyRS.getString(3));
+                event.setLongitude(keyRS.getString(4));
+                event.setCountry(keyRS.getString(5));
+                event.setCity(keyRS.getString(6));
+                event.setEventType(keyRS.getString(7));
+                event.setYear(keyRS.getString(8));
+
+                queryEvents.add(event);
+            }
+
+            if (queryEvents.size() == 1) {
+                System.out.print("Event found!");
+                return queryEvents.get(0);
+            }
+            System.out.print("Event not found!");
+        }
+        catch (SQLException e)
+        {
+            System.out.print("Event Read SQL Exception: " + e.getMessage());
+            connection.rollback();
+        }
+        catch (Exception e)
+        {
+            System.out.print("Event Read General Exception: " + e.getMessage());
+            connection.rollback();;
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
         return null;
     }
 
     /**
-     * Deletes all persons from database and returns a true boolean if the request succeeded
+     * Takes in a eventid string to delete a specific user from the database
+     * @param eventID string is passed in
+     * @return Returns a true boolean if the user was deleted
+     */
+    public Boolean deleteEvent(String eventID) throws SQLException
+    {
+        try {
+            String sql = "delete from Events where EventID = ?";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, eventID);
+
+            if (stmt.executeUpdate() == 1) {
+                System.out.print("Delete Successful!");
+                return true;
+            }
+            System.out.print("Event not found!");
+        }
+        catch (SQLException e)
+        {
+            System.out.print("Event Delete SQL Exception: " + e.getMessage());
+            connection.rollback();
+        }
+        catch (Exception e)
+        {
+            System.out.print("Event Delete General Exception: " + e.getMessage());
+            connection.rollback();;
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
+        return false;
+    }
+
+    /**
+     * Deletes all users from database and returns a true boolean if the request succeeded
      * @return returns true if the request succeeded
      */
-    public Boolean deleteAllEvents()
+    public Boolean deleteAllEvents() throws SQLException
     {
-        return true;
+        try {
+            String sql = "delete from Events";
+            stmt = connection.prepareStatement(sql);
+
+            if (stmt.executeUpdate() > 0) {
+                System.out.print("Delete successful!");
+                return true;
+            }
+
+            System.out.print("Delete unsuccessful");
+        }
+        catch (SQLException e)
+        {
+            System.out.print("Event DeleteAll SQL Exception: " + e.getMessage());
+            connection.rollback();
+        }
+        catch (Exception e)
+        {
+            System.out.print("Event DeleteAll General Exception: " + e.getMessage());
+            connection.rollback();;
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
+        return false;
     }
 
-    /**
-     * Takes in a eventID string to delete a specific event from the database
-     * @param eventID string is passed in
-     * @return Returns a true boolean if the event was deleted
-     */
-    public Boolean deleteEvent(String eventID)
+    public ArrayList<Event> readPersonEvents(String userID) throws SQLException
     {
-        return true;
+        try {
+            //this would definitely have to be recursive if
+            String sql = "select EventID, Descendant, PersonID, Latitude, Longitude, Country, City, EventType, EventYear from Events" +
+                    " where Events.Descendant = ?";
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, userID);
+
+            keyRS = stmt.executeQuery();
+
+            ArrayList<Event> queryPersons = new ArrayList();
+
+            while (keyRS.next()) {
+                Event event = new Event();
+                event.setID(keyRS.getString(1));
+                event.setDescendant(keyRS.getString(2));
+                event.setPerson(keyRS.getString(3));
+                event.setLatitude(keyRS.getString(4));
+                event.setLongitude(keyRS.getString(5));
+                event.setCountry(keyRS.getString(6));
+                event.setCity(keyRS.getString(7));
+                event.setEventType(keyRS.getString(8));
+                event.setYear(keyRS.getString(9));
+
+                queryPersons.add(event);
+            }
+
+            if (queryPersons.size() > 0) {
+                System.out.print("Events found!");
+                return queryPersons;
+            }
+            System.out.print("No events found!");
+        }
+        catch (SQLException e)
+        {
+            System.out.print("Event ReadPerson SQL Exception: " + e.getMessage());
+            connection.rollback();
+        }
+        catch (Exception e)
+        {
+            System.out.print("Event ReadPerson General Exception: " + e.getMessage());
+            connection.rollback();;
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
+        return null;
     }
 
-
-    /**
-     * Takes in the userid of the current user as a string and looks in the database
-     * to find all other family members of the current user and returns the events
-     * belonging to those family members
-     * @param UserID
-     * @return Event[] array of Events
-     */
-    public Event[] readEventFamily(String UserID) { return null; }
 
 
     public void setConnection(Connection connection) {
