@@ -55,10 +55,12 @@ public class UserDAO {
         catch (SQLException e)
         {
             System.out.print("User Insert SQL Exception: " + e.getMessage());
+            connection.rollback();
         }
         catch (Exception e)
         {
             System.out.print("User Insert General Exception: " + e.getMessage());
+            connection.rollback();
         }
         finally
         {
@@ -78,36 +80,52 @@ public class UserDAO {
      */
     public User readUser(String userName) throws SQLException
     {
-        String sql = "select UserName, Password, Email, FirstName, LastName, Gender, PersonID from Users" +
-                " where Users.UserName = ?";
+        try {
+            String sql = "select UserName, Password, Email, FirstName, LastName, Gender, PersonID from Users" +
+                    " where Users.UserName = ?";
 
-        stmt = connection.prepareStatement(sql);
-        stmt.setString(1, userName);
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, userName);
 
-        keyRS = stmt.executeQuery();
+            keyRS = stmt.executeQuery();
 
-        ArrayList<User> queryUsers = new ArrayList();
+            ArrayList<User> queryUsers = new ArrayList();
 
-        while(keyRS.next())
-        {
-            User user = new User();
-            user.setUserName(keyRS.getString(1));
-            user.setPassword(keyRS.getString(2));
-            user.setEmail(keyRS.getString(3));
-            user.setFirstName(keyRS.getString(4));
-            user.setLastName(keyRS.getString(5));
-            user.setGender(keyRS.getString(6));
-            user.setID(keyRS.getString(7));
+            while (keyRS.next()) {
+                User user = new User();
+                user.setUserName(keyRS.getString(1));
+                user.setPassword(keyRS.getString(2));
+                user.setEmail(keyRS.getString(3));
+                user.setFirstName(keyRS.getString(4));
+                user.setLastName(keyRS.getString(5));
+                user.setGender(keyRS.getString(6));
+                user.setID(keyRS.getString(7));
 
-            queryUsers.add(user);
+                queryUsers.add(user);
+            }
+
+            if (queryUsers.size() == 1) {
+                System.out.print("User found!");
+                return queryUsers.get(0);
+            }
+            System.out.print("User not found!");
         }
-
-        if(queryUsers.size() == 1)
+        catch(SQLException e)
         {
-            System.out.print("User found!");
-            return queryUsers.get(0);
+            System.out.print(e.getMessage());
+            connection.rollback();
         }
-        System.out.print("User not found!");
+        catch(Exception e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
         return null;
     }
 
@@ -118,16 +136,33 @@ public class UserDAO {
      */
     public Boolean deleteUser(String userName) throws SQLException
     {
-        String sql = "delete from Users where UserName = ?";
-        stmt = connection.prepareStatement(sql);
-        stmt.setString(1, userName);
+        try {
+            String sql = "delete from Users where UserName = ?";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, userName);
 
-        if(stmt.executeUpdate() == 1)
-        {
-            System.out.print("Delete Successful!");
-            return true;
+            if (stmt.executeUpdate() == 1) {
+                System.out.print("Delete Successful!");
+                return true;
+            }
+            System.out.print("User not found!");
         }
-        System.out.print("User not found!");
+        catch(SQLException e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        catch(Exception e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
         return false;
     }
 
@@ -137,16 +172,33 @@ public class UserDAO {
      */
     public Boolean deleteAllUsers() throws SQLException
     {
-        String sql = "delete from Users";
-        stmt = connection.prepareStatement(sql);
+        try {
+            String sql = "delete from Users";
+            stmt = connection.prepareStatement(sql);
 
-        if(stmt.executeUpdate() > 0)
-        {
-            System.out.print("Delete successful!");
-            return true;
+            if (stmt.executeUpdate() > 0) {
+                System.out.print("Delete successful!");
+                return true;
+            }
+
+            System.out.print("Delete unsuccessful");
         }
-
-        System.out.print("Delete unsuccessful");
+        catch(SQLException e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        catch(Exception e)
+        {
+            System.out.print(e.getMessage());
+            connection.rollback();
+        }
+        finally
+        {
+            if (stmt != null) stmt.close();
+            if (keyRS != null) keyRS.close();
+            if (keyStmt != null) keyStmt.close();
+        }
         return false;
     }
 
