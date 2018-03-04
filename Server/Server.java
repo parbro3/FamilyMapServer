@@ -3,15 +3,9 @@ import java.io.*;
 import java.net.*;
 import com.sun.net.httpserver.*;
 
-import Handler.ClearHandler;
-import Handler.EventHandler;
-import Handler.EventIDHandler;
-import Handler.FillHandler;
-import Handler.LoadHandler;
-import Handler.LoginHandler;
-import Handler.PersonHandler;
-import Handler.PersonIDHandler;
-import Handler.RegisterHandler;
+import org.xml.sax.helpers.DefaultHandler;
+
+import Handler.*;
 
 
 /**
@@ -68,6 +62,7 @@ public class Server {
         server.createContext("/person", new PersonHandler());
         server.createContext("/event/", new EventIDHandler());
         server.createContext("/event", new EventHandler());
+        server.createContext("/", new Handler.DefaultHandler());
 
 
         // Log message indicating that the HttpServer is about the start accepting

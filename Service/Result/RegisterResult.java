@@ -1,5 +1,7 @@
 package Service.Result;
 
+import Model.AuthToken;
+
 /**
  * Represents the Register Result object with the appropriate message and data
  * depending on the outcome of the Register service.

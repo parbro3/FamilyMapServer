@@ -42,6 +42,16 @@ public class User extends Model {
      */
     public User() {}
 
+    public User(String userName, String password, String email, String firstName, String lastName, String gender) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.setID(this.generateID());
+    }
+
     public String getUserName() {
         return userName;
     }

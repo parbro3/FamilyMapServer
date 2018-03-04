@@ -20,16 +20,20 @@ public class RegisterHandler implements HttpHandler{
     @Override
     public void handle(HttpExchange exchange)
     {
+        System.out.print("Register Handler!\n");
         Gson gson = new Gson();
         Boolean success = false;
-
+        RegisterResult rResult = null;
 
         try
         {
-
             //check for post... should be post
             if(exchange.getRequestMethod().toLowerCase().equals("post"))
             {
+
+                //should we check if the username is already used??
+                //or do we leave that up to the DAO?
+
                 Headers reqHeaders = exchange.getRequestHeaders();
                 //String body = exchange.getRequestBody();
 
@@ -42,24 +46,35 @@ public class RegisterHandler implements HttpHandler{
                 String reqData = readString(reqBody);
 
                 //print json data
-                System.out.println(reqData);
-
+                System.out.println("Data\n" + reqData + "\n");
 
                 //CREATE REQUEST, SERVICE, AND RESULT, AND ENTER SERVICE CLASS
                 RegisterRequest rRequest = gson.fromJson(reqData, RegisterRequest.class);
 
 
                 RegisterService rService = new RegisterService();
-                RegisterResult rResult = rService.service(rRequest);
-                String respData = gson.toJson(rResult);
 
-
-                //send response headers
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                //if username doesn't exist in system... create it.
+                if (!rService.checkUsername(rRequest.getUserName())) {
+                    rResult = rService.service(rRequest);
+                    String respData = gson.toJson(rResult);
+                    //send response headers
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                    System.out.print("Handler: User Created\n");
+                }
+                else
+                {
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                    System.out.print("Handler: Username already exists!\n");
+                }
 
                 // Get the response body output stream.
                 OutputStream respBody = exchange.getResponseBody();
                 // Write the JSON string to the output stream.
+
+                //respData is going to be the result stuff...
+
+                String respData = gson.toJson(rResult);
                 writeString(respData, respBody);
 
 
@@ -72,7 +87,7 @@ public class RegisterHandler implements HttpHandler{
         }
         catch(Exception e)
         {
-
+            System.out.print(e.getMessage());
         }
 
     }

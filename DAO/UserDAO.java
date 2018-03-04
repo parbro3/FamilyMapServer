@@ -35,7 +35,10 @@ public class UserDAO {
         {
             String sql = "insert into Users (UserName, Password, Email, FirstName, LastName, Gender, PersonID)" +
                     " values (?, ?, ?, ?, ?, ?, ?)";
+
+            System.out.print("before prepare statement\n");
             stmt = connection.prepareStatement(sql);
+            System.out.print("after prepare statement\n");
             stmt.setString(1, user.getUserName());
             stmt.setString(2, user.getPassword());
             stmt.setString(3, user.getEmail());
@@ -126,6 +129,7 @@ public class UserDAO {
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
         }
+        System.out.print("Read User: Returning Null\n");
         return null;
     }
 
