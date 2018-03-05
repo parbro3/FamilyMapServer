@@ -41,11 +41,12 @@ public class RegisterService{
         User user = new User(request.getUserName(), request.getPassWord(),request.getEmail(),request.getFirstName(),request.getLastName(),request.getGender());
         AuthToken authToken = null;
 
+        RegisterResult rResult = new RegisterResult();
 
         //probably need to edit this DAO stuff to check for stuff first butttt....
-        dao.openConnection();
         try
         {
+            dao.openConnection();
             if(dao.getUserDAO().createUser(user))
             {
                 //create the auth token??
@@ -56,7 +57,7 @@ public class RegisterService{
                 //create the auth token in the database!!
                 dao.getAuthTokenDAO().createAuthToken(authToken);
 
-                RegisterResult rResult = new RegisterResult();
+
                 rResult.setUserName(user.getUserName());
                 rResult.setPersonID(user.getID());
 
@@ -69,10 +70,14 @@ public class RegisterService{
         }
         catch(SQLException e)
         {
+            dao.closeConnection(false);
+            rResult.setMessage("Clear Tables Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
+            dao.closeConnection(false);
+            rResult.setMessage("Clear Tables Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }
 

@@ -1,5 +1,9 @@
 package Service;
 
+import java.sql.SQLException;
+
+import DAO.DAO;
+import Service.Request.ClearRequest;
 import Service.Request.Request;
 import Service.Result.ClearResult;
 
@@ -14,7 +18,9 @@ import Service.Result.ClearResult;
  * Service method takes an object that implements "request" as a parameter and returns an object
  * of that implements "result."
  */
-public class ClearService implements Service {
+public class ClearService {
+
+    DAO dao = new DAO();
 
     /**
      * Brains of the eventID creator. Verifies Request.
@@ -23,8 +29,43 @@ public class ClearService implements Service {
      * @param request of type Request Interface
      * @return Returns a ClearResult with success or error message.
      */
-    public ClearResult service( Request request ){
-        return null;
+    public ClearResult service( ClearRequest request ){
+
+        System.out.print("Entered Clear service function!" );
+
+        //probably need to edit this DAO stuff to check for stuff first butttt....
+        ClearResult cResult = new ClearResult();
+
+        try
+        {
+            dao.openConnection();
+            dao.getAuthTokenDAO().deleteAllAuthTokens();
+            dao.getEventDAO().deleteAllEvents();
+            dao.getPersonDAO().deleteAllPersons();
+            dao.getUserDAO().deleteAllUsers();
+
+            //return clear result
+            cResult.setMessage("Clear succeeded.");
+            dao.closeConnection(true);
+            return cResult;
+        }
+        catch(SQLException e)
+        {
+            dao.closeConnection(false);
+            cResult.setMessage("Clear Tables Error: " + e.getMessage());
+            System.out.print(e.getMessage());
+        }
+        catch(Exception e)
+        {
+            dao.closeConnection(false);
+            cResult.setMessage("Clear Tables Error: " + e.getMessage());
+            System.out.print(e.getMessage());
+        }
+        finally
+        {
+            return cResult;
+        }
+
     }
 
 }

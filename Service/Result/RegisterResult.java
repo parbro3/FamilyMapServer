@@ -12,7 +12,7 @@ public class RegisterResult implements Result{
     /**
      * RegisterResult's error message
      */
-    String errorMessage;
+    String message;
     /**
      * RegisterResult's authorization token
      */
@@ -32,12 +32,12 @@ public class RegisterResult implements Result{
     public RegisterResult() {
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getAuthToken() {
