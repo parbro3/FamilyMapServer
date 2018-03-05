@@ -10,11 +10,7 @@ public class ClearResult implements Result {
     /**
      * ClearResult's success message
      */
-    String successMessage;
-    /**
-     * ClearResult's error message
-     */
-    String errorMessage;
+    String message;
 
 
     /**
@@ -23,19 +19,11 @@ public class ClearResult implements Result {
     public ClearResult() {
     }
 
-    public String getSuccessMessage() {
-        return successMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setSuccessMessage(String successMessage) {
-        this.successMessage = successMessage;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String successMessage) {
+        this.message = successMessage;
     }
 }

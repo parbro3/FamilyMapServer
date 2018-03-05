@@ -1,7 +1,12 @@
 package Service;
 
+import java.sql.SQLException;
+
+import Model.AuthToken;
 import Service.Result.*;
 import Service.Request.*;
+import Model.User;
+import DAO.*;
 
 /**
  * Represents a Register Service object. Implements Service interface.
@@ -16,7 +21,9 @@ import Service.Request.*;
  * of that implements "result."
  */
 
-public class RegisterService implements Service{
+public class RegisterService{
+
+    DAO dao = new DAO();
 
     /**
      * Brains of the register service. Verifies Request.
@@ -26,9 +33,78 @@ public class RegisterService implements Service{
      * @param request of type Request Interface
      * @return Returns a RegisterResult with success or error message.
      */
-    public RegisterResult service( Request request )
+    public RegisterResult service( RegisterRequest request )
     {
+        System.out.print("Entered service function!" );
+
+        //gotta build user object out of the request...
+        User user = new User(request.getUserName(), request.getPassWord(),request.getEmail(),request.getFirstName(),request.getLastName(),request.getGender());
+        AuthToken authToken = null;
+
+        RegisterResult rResult = new RegisterResult();
+
+        //probably need to edit this DAO stuff to check for stuff first butttt....
+        try
+        {
+            dao.openConnection();
+            if(dao.getUserDAO().createUser(user))
+            {
+                //create the auth token??
+                authToken = new AuthToken();
+                authToken.setUserName(user.getUserName());
+                authToken.setID(authToken.generateID());
+
+                //create the auth token in the database!!
+                dao.getAuthTokenDAO().createAuthToken(authToken);
+
+
+                rResult.setUserName(user.getUserName());
+                rResult.setPersonID(user.getID());
+
+                //is this where i build the auth token???
+                //and set it to the user name??
+                rResult.setAuthToken(authToken.getID());
+                dao.closeConnection(true);
+                return rResult;
+            }
+        }
+        catch(SQLException e)
+        {
+            dao.closeConnection(false);
+            rResult.setMessage("Clear Tables Error: " + e.getMessage());
+            System.out.print(e.getMessage());
+        }
+        catch(Exception e)
+        {
+            dao.closeConnection(false);
+            rResult.setMessage("Clear Tables Error: " + e.getMessage());
+            System.out.print(e.getMessage());
+        }
+
         return null;
+    }
+
+    public Boolean checkUsername(String username)
+    {
+        DAO dao = new DAO();
+        dao.openConnection();
+        try
+        {
+            if(dao.getUserDAO().readUser(username) == null)
+            {
+                //dao.closeConnection(true);
+                return false;
+            }
+        }
+        catch(SQLException e)
+        {
+            System.out.print(e.getMessage());
+        }
+        finally
+        {
+            dao.closeConnection(true);
+        }
+        return true;
     }
 
     /*

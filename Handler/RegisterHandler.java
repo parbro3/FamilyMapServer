@@ -8,6 +8,7 @@ import com.sun.net.httpserver.*;
 import Service.RegisterService;
 import Service.Request.RegisterRequest;
 import Service.Result.RegisterResult;
+import JSON.Encoder;
 
 /**
  * Represents the register handler object instantiated when the /register api is called
@@ -20,16 +21,19 @@ public class RegisterHandler implements HttpHandler{
     @Override
     public void handle(HttpExchange exchange)
     {
-        Gson gson = new Gson();
-        Boolean success = false;
+        System.out.print("Register Handler!\n");
 
+        Boolean success = false;
+        RegisterResult rResult = null;
+        String respData = "";
 
         try
         {
-
             //check for post... should be post
             if(exchange.getRequestMethod().toLowerCase().equals("post"))
             {
+                //*************** GET DATA FROM EXCHANGE ****************
+
                 Headers reqHeaders = exchange.getRequestHeaders();
                 //String body = exchange.getRequestBody();
 
@@ -39,59 +43,60 @@ public class RegisterHandler implements HttpHandler{
                 // Get the request body input stream
                 InputStream reqBody = exchange.getRequestBody();
                 // Read JSON string from the input stream
-                String reqData = readString(reqBody);
+
+                Encoder encoder = new Encoder();
+                String reqData = encoder.readString(reqBody);
 
                 //print json data
-                System.out.println(reqData);
+                System.out.println("Data\n" + reqData + "\n");
 
+                //****************************************************
+
+
+                //************** PERFORM SERVICE ****************
 
                 //CREATE REQUEST, SERVICE, AND RESULT, AND ENTER SERVICE CLASS
-                RegisterRequest rRequest = gson.fromJson(reqData, RegisterRequest.class);
-
-
+                RegisterRequest rRequest = (RegisterRequest)encoder.decode(reqData, RegisterRequest.class);
                 RegisterService rService = new RegisterService();
-                RegisterResult rResult = rService.service(rRequest);
-                String respData = gson.toJson(rResult);
+
+                //if username doesn't exist in system... create it.
+                if (!rService.checkUsername(rRequest.getUserName())) {
+                    rResult = rService.service(rRequest);
+                    respData = encoder.encode(rResult);
+                    //String respData = gson.toJson(rResult);
+                    //send response headers
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                    System.out.print("Handler: User Created\n");
+                }
+                else
+                {
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                    System.out.print("Handler: Username already exists!\n");
+                }
+                //************************************************
 
 
-                //send response headers
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 
+                //*************** SEND DATA BACK *****************
                 // Get the response body output stream.
                 OutputStream respBody = exchange.getResponseBody();
-                // Write the JSON string to the output stream.
-                writeString(respData, respBody);
 
+                //WRITE DATA TO RESPBODY
+                encoder.writeString(respData, respBody);
 
-                // Close the output stream.  This is how Java knows we are done
-                // sending data and the response is complete/
+                //SEND DATA
                 respBody.close();
+
+                //************************************************
 
                 success = true;
             }
         }
         catch(Exception e)
         {
-
+            System.out.print(e.getMessage());
         }
 
-    }
-
-    private void writeString(String str, OutputStream os) throws IOException {
-        OutputStreamWriter sw = new OutputStreamWriter(os);
-        sw.write(str);
-        sw.flush();
-    }
-
-    private String readString(InputStream is) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        InputStreamReader sr = new InputStreamReader(is);
-        char[] buf = new char[1024];
-        int len;
-        while ((len = sr.read(buf)) > 0) {
-            sb.append(buf, 0, len);
-        }
-        return sb.toString();
     }
 
 

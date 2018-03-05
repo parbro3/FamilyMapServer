@@ -12,6 +12,6 @@ public class EventHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange)
     {
-
+        System.out.print("Event Handler!\n");
     }
 }
