@@ -8,10 +8,28 @@ package Service.Request;
 
 public class PersonIDRequest {
 
+    String authID;
+    String personID;
+
     /**
      * Empty constructor
      */
     public PersonIDRequest() {
     }
 
+    public String getAuthID() {
+        return authID;
+    }
+
+    public void setAuthID(String authID) {
+        this.authID = authID;
+    }
+
+    public String getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(String personID) {
+        this.personID = personID;
+    }
 }
