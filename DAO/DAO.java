@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class DAO {
 
-    private Connection connection = null;
+    protected static Connection connection = null;
     private UserDAO userDAO = null;
     private PersonDAO personDAO = null;
     private EventDAO eventDAO = null;
@@ -18,6 +18,10 @@ public class DAO {
 
 
     public DAO()
+    {
+    }
+
+    public void initialize()
     {
         try {
             final String driver = "org.sqlite.JDBC";
@@ -73,22 +77,18 @@ public class DAO {
     }
 
     public UserDAO getUserDAO() {
-        userDAO.setConnection(this.connection);
         return userDAO;
     }
 
     public PersonDAO getPersonDAO() {
-        personDAO.setConnection(this.connection);
         return personDAO;
     }
 
     public EventDAO getEventDAO() {
-        eventDAO.setConnection(this.connection);
         return eventDAO;
     }
 
     public AuthTokenDAO getAuthTokenDAO() {
-        authTokenDAO.setConnection(this.connection);
         return authTokenDAO;
     }
 }
