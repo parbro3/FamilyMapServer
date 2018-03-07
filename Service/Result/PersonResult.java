@@ -1,4 +1,5 @@
 package Service.Result;
+import Model.Person;
 
 /**
  * Represents the Person Result object with the appropriate message
@@ -8,30 +9,31 @@ package Service.Result;
 public class PersonResult  implements Result{
 
     /**
-     * PersonResult's success message
-     */
-    String successMessage;
-    /**
      * PersonResult's error message
      */
-    String errorMessage;
+    String message;
+
+    /**
+     * Array of Person objects
+     */
+    Person[] data;
 
     public PersonResult() {
     }
 
-    public String getSuccessMessage() {
-        return successMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setSuccessMessage(String successMessage) {
-        this.successMessage = successMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public Person[] getData() {
+        return data;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setData(Person[] data) {
+        this.data = data;
     }
 }

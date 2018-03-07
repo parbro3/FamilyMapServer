@@ -24,6 +24,9 @@ import DAO.*;
 public class RegisterService{
 
     DAO dao = new DAO();
+    //gotta build user object out of the request...
+    User user = null;
+    AuthToken authToken = null;
 
     /**
      * Brains of the register service. Verifies Request.
@@ -37,35 +40,38 @@ public class RegisterService{
     {
         System.out.print("Entered service function!" );
 
-        //gotta build user object out of the request...
-        User user = new User(request.getUserName(), request.getPassWord(),request.getEmail(),request.getFirstName(),request.getLastName(),request.getGender());
-        AuthToken authToken = null;
-
         RegisterResult rResult = new RegisterResult();
 
         //probably need to edit this DAO stuff to check for stuff first butttt....
         try
         {
-            dao.openConnection();
-            if(dao.getUserDAO().createUser(user))
+            if(request.checkValues()) {
+                if (!checkUsername(request.getUserName())) {
+                    user = new User(request.getUserName(), request.getPassWord(),request.getEmail(),request.getFirstName(),request.getLastName(),request.getGender());
+                    dao.openConnection();
+
+                    if (dao.getUserDAO().createUser(user)) {
+                        //create the auth token??
+                        authToken = new AuthToken();
+                        authToken.setUserName(user.getUserName());
+                        authToken.setID(authToken.generateID());
+
+                        //create the auth token in the database!!
+                        dao.getAuthTokenDAO().createAuthToken(authToken);
+
+                        rResult.setUserName(user.getUserName());
+                        rResult.setPersonID(user.getID());
+
+                        rResult.setAuthToken(authToken.getID());
+                        dao.closeConnection(true);
+                        return rResult;
+                    }
+                } else {
+                    rResult.setMessage("Username already taken by another user");
+                }
+            } else
             {
-                //create the auth token??
-                authToken = new AuthToken();
-                authToken.setUserName(user.getUserName());
-                authToken.setID(authToken.generateID());
-
-                //create the auth token in the database!!
-                dao.getAuthTokenDAO().createAuthToken(authToken);
-
-
-                rResult.setUserName(user.getUserName());
-                rResult.setPersonID(user.getID());
-
-                //is this where i build the auth token???
-                //and set it to the user name??
-                rResult.setAuthToken(authToken.getID());
-                dao.closeConnection(true);
-                return rResult;
+                rResult.setMessage(("Request property missing or has invalid value"));
             }
         }
         catch(SQLException e)
@@ -80,13 +86,11 @@ public class RegisterService{
             rResult.setMessage("Clear Tables Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }
-
-        return null;
+        return rResult;
     }
 
     public Boolean checkUsername(String username)
     {
-        DAO dao = new DAO();
         dao.openConnection();
         try
         {
@@ -107,14 +111,4 @@ public class RegisterService{
         return true;
     }
 
-    /*
-    This is the brains of the operations... the service classes
-     */
-
-    /*
-    Register Service class:
-     register(uer)
-     UserDAO.findUser(username);
-     UserDAO.add(user);
-     */
 }

@@ -76,6 +76,7 @@ public class AuthTokenDAO {
     public AuthToken readAuthToken(String AuthID) throws SQLException
     {
         try {
+            System.out.print("Entered AuthToken read function\n");
             String sql = "select AuthTokenID, UserName from AuthTokens" +
                     " where AuthTokens.AuthTokenID = ?";
 

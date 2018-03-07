@@ -51,9 +51,6 @@ public class ClearHandler implements HttpHandler {
                 //String respData = gson.toJson(rResult);
                 //send response headers
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                System.out.print("Handler: User Created\n");
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                System.out.print("Handler: Username already exists!\n");
                 //************************************************
 
 

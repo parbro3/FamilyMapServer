@@ -33,6 +33,7 @@ public class PersonIDService {
 
         try
         {
+            System.out.print("Entered PersonID Service Function!");
             //if the check was good....
             String checkAuthResult = checkAuth(request.getPersonID(), request.getAuthID());
             if (checkAuthResult.equals("good")) {
@@ -79,7 +80,7 @@ public class PersonIDService {
         try
         {
             dao.openConnection();
-            AuthToken authToken = dao.getAuthTokenDAO().readAuthToken("authID");
+            AuthToken authToken = dao.getAuthTokenDAO().readAuthToken(authID);
             Person person = dao.getPersonDAO().readPerson(personID);
 
             if(authToken != null)

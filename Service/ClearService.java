@@ -52,13 +52,13 @@ public class ClearService {
         catch(SQLException e)
         {
             dao.closeConnection(false);
-            cResult.setMessage("Clear Tables Error: " + e.getMessage());
+            cResult.setMessage("Internal Server Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
             dao.closeConnection(false);
-            cResult.setMessage("Clear Tables Error: " + e.getMessage());
+            cResult.setMessage("Internal Server Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }
         finally

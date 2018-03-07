@@ -60,19 +60,12 @@ public class RegisterHandler implements HttpHandler{
                 RegisterService rService = new RegisterService();
 
                 //if username doesn't exist in system... create it.
-                if (!rService.checkUsername(rRequest.getUserName())) {
-                    rResult = rService.service(rRequest);
-                    respData = encoder.encode(rResult);
-                    //String respData = gson.toJson(rResult);
-                    //send response headers
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                    System.out.print("Handler: User Created\n");
-                }
-                else
-                {
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                    System.out.print("Handler: Username already exists!\n");
-                }
+
+                rResult = rService.service(rRequest);
+                respData = encoder.encode(rResult);
+                //String respData = gson.toJson(rResult);
+                //send response headers
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 //************************************************
 
 

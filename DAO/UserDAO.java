@@ -84,6 +84,7 @@ public class UserDAO {
     public User readUser(String userName) throws SQLException
     {
         try {
+            System.out.print("Entered Read User Function! ");
             String sql = "select UserName, Password, Email, FirstName, LastName, Gender, PersonID from Users" +
                     " where Users.UserName = ?";
 

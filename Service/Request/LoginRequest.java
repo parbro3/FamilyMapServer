@@ -22,6 +22,11 @@ public class LoginRequest {
     public LoginRequest() {
     }
 
+    public Boolean checkValues()
+    {
+        return (getPassWord()!= null && getUserName()!=null);
+    }
+
     public String getUserName() {
         return userName;
     }

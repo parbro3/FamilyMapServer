@@ -25,7 +25,11 @@ public class LoadRequest {
     /**
      * Empty constructor
      */
-    public LoadRequest() {
+    public LoadRequest() {}
+
+    public Boolean checkValues()
+    {
+        return (getUsers()!= null && getEvents()!=null && getPersons()!= null);
     }
 
     public String[] getUsers() {

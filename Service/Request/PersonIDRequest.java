@@ -17,6 +17,11 @@ public class PersonIDRequest {
     public PersonIDRequest() {
     }
 
+    public Boolean checkValues()
+    {
+        return(getAuthID()!= null && getPersonID()!=null);
+    }
+
     public String getAuthID() {
         return authID;
     }

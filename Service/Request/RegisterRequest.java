@@ -40,6 +40,11 @@ public class RegisterRequest implements Request{
      */
     public RegisterRequest() {}
 
+    public Boolean checkValues()
+    {
+        return(getUserName()!= null && getEmail()!=null && getFirstName()!= null &&
+                getGender()!= null && getLastName()!= null && getPassWord()!= null);
+    }
 
     public String getUserName() {
         return userName;
