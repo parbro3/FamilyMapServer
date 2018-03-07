@@ -38,7 +38,6 @@ public class PersonIDService {
             String checkAuthResult = checkAuth(request.getPersonID(), request.getAuthID());
             if (checkAuthResult.equals("good")) {
                 pResult = new PersonIDResult();
-                dao.openConnection();
                 Person person = dao.getPersonDAO().readPerson(request.getPersonID());
                 pResult.setDescendant(person.getDescendant());
                 pResult.setFatherID(person.getFatherID());
@@ -63,7 +62,6 @@ public class PersonIDService {
             System.out.print(e.getMessage());
         }
 
-        dao.closeConnection(true);
         return pResult;
     }
 
@@ -79,7 +77,7 @@ public class PersonIDService {
     {
         try
         {
-            dao.openConnection();
+            dao.initialize();
             AuthToken authToken = dao.getAuthTokenDAO().readAuthToken(authID);
             Person person = dao.getPersonDAO().readPerson(personID);
 
@@ -90,36 +88,30 @@ public class PersonIDService {
                     //now check if the person's descendant matches the authtoken username
                     if(authToken.getUserName().equals(person.getDescendant()))
                     {
-                        dao.closeConnection(false);
                         return "good";
                     }
                     else
                     {
-                        dao.closeConnection(false);
                         return "Requested person does not belong to this user";
                     }
                 }
                 else
                 {
-                    dao.closeConnection(false);
                     return "Invalid personID parameter";
                 }
             }
             else
             {
-                dao.closeConnection(false);
                 return "Invalid auth token";
             }
         }
         catch(SQLException e)
         {
-            dao.closeConnection(false);
-            System.out.print(e.getMessage());
+            System.out.print("Internal Server Error: " + e.getMessage());
         }
         catch(Exception e)
         {
-            dao.closeConnection(false);
-            System.out.print(e.getMessage());
+            System.out.print("Internal Server Error: " + e.getMessage());
         }
         return null;
     }

@@ -38,7 +38,7 @@ public class ClearService {
 
         try
         {
-            dao.openConnection();
+            dao.initialize();
             dao.getAuthTokenDAO().deleteAllAuthTokens();
             dao.getEventDAO().deleteAllEvents();
             dao.getPersonDAO().deleteAllPersons();
@@ -46,18 +46,15 @@ public class ClearService {
 
             //return clear result
             cResult.setMessage("Clear succeeded.");
-            dao.closeConnection(true);
             return cResult;
         }
         catch(SQLException e)
         {
-            dao.closeConnection(false);
             cResult.setMessage("Internal Server Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
-            dao.closeConnection(false);
             cResult.setMessage("Internal Server Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }

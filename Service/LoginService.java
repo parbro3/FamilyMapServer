@@ -41,11 +41,11 @@ public class LoginService {
 
         //probably need to edit this DAO stuff to check for stuff first butttt....
         try {
+            dao.initialize();
             if (request.checkValues()) {
                 if (checkUsername(request.getUserName())) {
                     if(checkPassword(request))
                     {
-                        dao.openConnection();
                         user = dao.getUserDAO().readUser(request.getUserName());
                         //create the auth token??
                         authToken = new AuthToken();
@@ -60,7 +60,6 @@ public class LoginService {
                         lResult.setPersonID(user.getID());
                         lResult.setAuthToken(authToken.getID());
 
-                        dao.closeConnection(true);
                         return lResult;
 
                     } else {
@@ -73,12 +72,10 @@ public class LoginService {
                 lResult.setMessage(("Request property missing or has invalid value"));
             }
         } catch (SQLException e) {
-            dao.closeConnection(false);
-            lResult.setMessage("Internal Server SQL Error: " + e.getMessage());
+            lResult.setMessage("Internal Server Error: " + e.getMessage());
             System.out.print(e.getMessage());
         } catch (Exception e) {
-            dao.closeConnection(false);
-            lResult.setMessage("Internal Server General Error: " + e.getMessage());
+            lResult.setMessage("Internal Server Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }
         return lResult;
@@ -86,7 +83,6 @@ public class LoginService {
 
     public Boolean checkPassword(LoginRequest request)
     {
-        dao.openConnection();
         try{
             User user = dao.getUserDAO().readUser(request.getUserName());
             if(user.getPassword().equals(request.getPassWord()))
@@ -104,16 +100,12 @@ public class LoginService {
     }
 
     public Boolean checkUsername(String username) {
-        dao.openConnection();
         try {
             if (dao.getUserDAO().readUser(username) == null) {
-                //dao.closeConnection(true);
                 return false;
             }
         } catch (SQLException e) {
             System.out.print(e.getMessage());
-        } finally {
-            dao.closeConnection(true);
         }
         return true;
     }

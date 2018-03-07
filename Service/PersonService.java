@@ -7,6 +7,7 @@ import Service.Request.PersonRequest;
 import Service.Result.PersonResult;
 import DAO.DAO;
 import Model.Person;
+import java.util.ArrayList;
 
 /**
  * Represents a Person Service object. Implements Service interface.
@@ -40,22 +41,19 @@ public class PersonService {
         //probably need to edit this DAO stuff to check for stuff first butttt....
         try
         {
+            dao.initialize();
             System.out.print("looking for authtoken: " + request.getAuthID());
-            dao.openConnection();
             AuthToken authToken = dao.getAuthTokenDAO().readAuthToken(request.getAuthID());
             if (authToken != null) {
                 System.out.print("authToken is not null! ");
-                dao.openConnection();
 
                 User user = dao.getUserDAO().readUser(authToken.getUserName());
-                Person[] persons = (Person[])dao.getPersonDAO().readPersonsFamily(user.getID()).toArray();
+                ArrayList<Person> persons = dao.getPersonDAO().readPersonsFamily(user.getID());
 
-                //create the auth token in the database!!
-                dao.getAuthTokenDAO().createAuthToken(authToken);
+                Person[] personArray = new Person[persons.size()];
+                personArray = persons.toArray(personArray);
 
-                pResult.setData(persons);
-                dao.closeConnection(true);
-                return pResult;
+                pResult.setData(personArray);
 
             } else {
                 pResult.setMessage("Invalid auth token");
@@ -63,13 +61,11 @@ public class PersonService {
         }
         catch(SQLException e)
         {
-            dao.closeConnection(false);
             pResult.setMessage("Internal Server Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
-            dao.closeConnection(false);
             pResult.setMessage("Internal Server Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }

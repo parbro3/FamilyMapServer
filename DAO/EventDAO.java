@@ -111,8 +111,12 @@ public class EventDAO extends DAO {
             if (queryEvents.size() == 1) {
                 System.out.print("Event found!");
             }
+            else
+            {
+                System.out.print("Event not found!");
+            }
             closeConnection(true);
-            System.out.print("Event not found!");
+
         }
         catch (SQLException e)
         {
@@ -156,8 +160,12 @@ public class EventDAO extends DAO {
                 System.out.print("Delete Successful!");
                 success = true;
             }
+            else
+            {
+                System.out.print("Event not found!");
+            }
             closeConnection(true);
-            System.out.print("Event not found!");
+
         }
         catch (SQLException e)
         {
@@ -194,9 +202,13 @@ public class EventDAO extends DAO {
                 System.out.print("Delete successful!");
                 success = true;
             }
+            else
+            {
+                System.out.print("Delete unsuccessful");
+            }
 
             closeConnection(true);
-            System.out.print("Delete unsuccessful");
+
         }
         catch (SQLException e)
         {
@@ -249,8 +261,11 @@ public class EventDAO extends DAO {
             if (queryEvents.size() > 0) {
                 System.out.print("Events found!");
             }
+            else {
+                System.out.print("No events found!");
+            }
             closeConnection(true);
-            System.out.print("No events found!");
+
         }
         catch (SQLException e)
         {

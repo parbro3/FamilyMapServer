@@ -113,7 +113,9 @@ public class UserDAO extends DAO{
             if (queryUsers.size() == 1) {
                 System.out.print("User found!");
             }
-            System.out.print("User not found!");
+            else {
+                System.out.print("User not found!");
+            }
             closeConnection(true);
         }
         catch(SQLException e)
@@ -160,8 +162,12 @@ public class UserDAO extends DAO{
                 System.out.print("Delete Successful!");
                 success = true;
             }
+            else
+            {
+                System.out.print("User not found!");
+            }
             closeConnection(true);
-            System.out.print("User not found!");
+
         }
         catch(SQLException e)
         {
@@ -198,9 +204,11 @@ public class UserDAO extends DAO{
                 System.out.print("Delete successful!");
                 success = true;
             }
-
+            else
+            {
+                System.out.print("Delete unsuccessful");
+            }
             closeConnection(true);
-            System.out.print("Delete unsuccessful");
         }
         catch(SQLException e)
         {

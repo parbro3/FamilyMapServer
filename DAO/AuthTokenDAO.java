@@ -100,8 +100,12 @@ public class AuthTokenDAO extends DAO{
             if (queryAuthTokens.size() == 1) {
                 System.out.print("AuthToken found!");
             }
+            else
+            {
+                System.out.print("AuthToken not found!");
+            }
             closeConnection(true);
-            System.out.print("AuthToken not found!");
+
         }
         catch(SQLException e)
         {
@@ -144,9 +148,12 @@ public class AuthTokenDAO extends DAO{
                 System.out.print("Delete successful!");
                 success = true;
             }
+            else
+            {
+                System.out.print("Delete unsuccessful");
+            }
 
             closeConnection(true);
-            System.out.print("Delete unsuccessful");
         }
         catch(SQLException e)
         {
@@ -185,8 +192,12 @@ public class AuthTokenDAO extends DAO{
                 System.out.print("Delete Successful!");
                 success = true;
             }
+            else
+            {
+                System.out.print("AuthToken not found!");
+            }
             closeConnection(true);
-            System.out.print("AuthToken not found!");
+
         }
         catch(SQLException e)
         {

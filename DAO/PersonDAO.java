@@ -116,8 +116,11 @@ public class PersonDAO extends DAO {
             if (queryPersons.size() == 1) {
                 System.out.print("Person found!");
             }
+            else {
+                System.out.print("Person not found!");
+            }
             closeConnection(true);
-            System.out.print("Person not found!");
+
         }
         catch(SQLException e)
         {
@@ -160,8 +163,12 @@ public class PersonDAO extends DAO {
                 System.out.print("Delete successful!");
                 success = true;
             }
+            else
+            {
+                System.out.print("Delete unsuccessful");
+            }
             closeConnection(true);
-            System.out.print("Delete unsuccessful");
+
         }
         catch(SQLException e)
         {
@@ -200,8 +207,12 @@ public class PersonDAO extends DAO {
                 System.out.print("Delete Successful!");
                 success = true;
             }
+            else
+            {
+                System.out.print("Person not found!");
+            }
             closeConnection(true);
-            System.out.print("Person not found!");
+
         }
         catch(SQLException e)
         {
@@ -261,8 +272,12 @@ public class PersonDAO extends DAO {
             if (queryPersons.size() > 0) {
                 System.out.print("Family members found!");
             }
+            else
+            {
+                System.out.print("No family members found!");
+            }
             closeConnection(true);
-            System.out.print("No family members found!");
+
         }
         catch(SQLException e)
         {

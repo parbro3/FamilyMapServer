@@ -45,10 +45,10 @@ public class RegisterService{
         //probably need to edit this DAO stuff to check for stuff first butttt....
         try
         {
+            dao.initialize();
             if(request.checkValues()) {
                 if (!checkUsername(request.getUserName())) {
                     user = new User(request.getUserName(), request.getPassWord(),request.getEmail(),request.getFirstName(),request.getLastName(),request.getGender());
-                    dao.openConnection();
 
                     if (dao.getUserDAO().createUser(user)) {
                         //create the auth token??
@@ -63,8 +63,6 @@ public class RegisterService{
                         rResult.setPersonID(user.getID());
 
                         rResult.setAuthToken(authToken.getID());
-                        dao.closeConnection(true);
-                        return rResult;
                     }
                 } else {
                     rResult.setMessage("Username already taken by another user");
@@ -76,14 +74,12 @@ public class RegisterService{
         }
         catch(SQLException e)
         {
-            dao.closeConnection(false);
-            rResult.setMessage("Clear Tables Error: " + e.getMessage());
+            rResult.setMessage("Internal Server Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
-            dao.closeConnection(false);
-            rResult.setMessage("Clear Tables Error: " + e.getMessage());
+            rResult.setMessage("Internal Server Error: " + e.getMessage());
             System.out.print(e.getMessage());
         }
         return rResult;
@@ -91,12 +87,10 @@ public class RegisterService{
 
     public Boolean checkUsername(String username)
     {
-        dao.openConnection();
         try
         {
             if(dao.getUserDAO().readUser(username) == null)
             {
-                //dao.closeConnection(true);
                 return false;
             }
         }
@@ -104,10 +98,7 @@ public class RegisterService{
         {
             System.out.print(e.getMessage());
         }
-        finally
-        {
-            dao.closeConnection(true);
-        }
+
         return true;
     }
 
