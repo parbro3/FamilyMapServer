@@ -1,5 +1,7 @@
 package Service.Result;
 
+import Model.Event;
+
 /**
  * Represents the Event Result object with the appropriate message
  * depending on the outcome of the Event service.
@@ -9,11 +11,9 @@ public class EventResult implements Result {
     /**
      * EventResult's error message
      */
-    String errorMessage;
-    /**
-     * EventResult's success message
-     */
-    String successMessage;
+    String message;
+
+    Event[] data;
 
 
     /**
@@ -22,19 +22,19 @@ public class EventResult implements Result {
     public EventResult() {
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getSuccessMessage() {
-        return successMessage;
+    public Event[] getData() {
+        return data;
     }
 
-    public void setSuccessMessage(String successMessage) {
-        this.successMessage = successMessage;
+    public void setData(Event[] data) {
+        this.data = data;
     }
 }

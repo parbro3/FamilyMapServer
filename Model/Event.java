@@ -66,11 +66,11 @@ public class Event extends Model {
         this.descendant = descendant;
     }
 
-    public String getPerson() {
+    public String getPersonID() {
         return personID;
     }
 
-    public void setPerson(String personID) {
+    public void setPersonID(String personID) {
         this.personID = personID;
     }
 

@@ -7,10 +7,19 @@ package Service.Request;
 
 public class EventRequest {
 
+    String authID;
+
     /**
      * Empty constructor
      */
     public EventRequest() {
     }
 
+    public String getAuthID() {
+        return authID;
+    }
+
+    public void setAuthID(String authID) {
+        this.authID = authID;
+    }
 }

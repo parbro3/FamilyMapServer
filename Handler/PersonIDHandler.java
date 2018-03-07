@@ -56,10 +56,13 @@ public class PersonIDHandler implements HttpHandler {
                 Encoder encoder = new Encoder();
 
                 //CREATE REQUEST, SERVICE, AND RESULT, AND ENTER SERVICE CLASS
-                PersonIDRequest pRequest = new PersonIDRequest();
+                PersonIDRequest request = new PersonIDRequest();
+                request.setAuthID(authID);
+                request.setPersonID(personID);
                 PersonIDService pService = new PersonIDService();
 
-                pResult = pService.service(pRequest);
+
+                pResult = pService.service(request);
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 //************************************************
 
