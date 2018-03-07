@@ -9,12 +9,11 @@ import java.util.ArrayList;
  * Methods access User table in database.
  */
 
-public class EventDAO {
+public class EventDAO extends DAO {
 
     PreparedStatement stmt = null;
     Statement keyStmt = null;
     ResultSet keyRS = null;
-    private Connection connection = null;
 
     /**
      * Empty constructor for Gson compatibility
@@ -33,6 +32,7 @@ public class EventDAO {
         Boolean success = false;
         try
         {
+            openConnection();
             String sql = "insert into Events (EventID, Descendant, PersonID, Latitude, Longitude, Country, City, EventType, EventYear)" +
                     " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = connection.prepareStatement(sql);
@@ -52,16 +52,17 @@ public class EventDAO {
                 System.out.print("Insert Event successful!");
                 success = true;
             }
+            closeConnection(true);
         }
         catch (SQLException e)
         {
             System.out.print("Event Insert SQL Exception: " + e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch (Exception e)
         {
             System.out.print("Event Insert General Exception: " + e.getMessage());
-            connection.rollback();;
+            closeConnection(false);
         }
         finally
         {
@@ -81,7 +82,10 @@ public class EventDAO {
      */
     public Event readEvent(String eventID) throws SQLException
     {
+        ArrayList<Event> queryEvents = new ArrayList();
+
         try {
+            openConnection();
             String sql = "select EventID, Descendant, PersonID, Latitude, Longitude, Country, City, EventType, EventYear from Events" +
                     " where Events.EventID = ?";
 
@@ -89,8 +93,6 @@ public class EventDAO {
             stmt.setString(1, eventID);
 
             keyRS = stmt.executeQuery();
-
-            ArrayList<Event> queryEvents = new ArrayList();
 
             while (keyRS.next()) {
                 Event event = new Event();
@@ -108,25 +110,30 @@ public class EventDAO {
 
             if (queryEvents.size() == 1) {
                 System.out.print("Event found!");
-                return queryEvents.get(0);
             }
+            closeConnection(true);
             System.out.print("Event not found!");
         }
         catch (SQLException e)
         {
             System.out.print("Event Read SQL Exception: " + e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch (Exception e)
         {
             System.out.print("Event Read General Exception: " + e.getMessage());
-            connection.rollback();;
+            closeConnection(false);
         }
         finally
         {
             if (stmt != null) stmt.close();
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
+        }
+
+        if(queryEvents.size() > 0)
+        {
+            return queryEvents.get(0);
         }
         return null;
     }
@@ -138,26 +145,29 @@ public class EventDAO {
      */
     public Boolean deleteEvent(String eventID) throws SQLException
     {
+        Boolean success = false;
         try {
+            openConnection();
             String sql = "delete from Events where EventID = ?";
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, eventID);
 
             if (stmt.executeUpdate() == 1) {
                 System.out.print("Delete Successful!");
-                return true;
+                success = true;
             }
+            closeConnection(true);
             System.out.print("Event not found!");
         }
         catch (SQLException e)
         {
             System.out.print("Event Delete SQL Exception: " + e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch (Exception e)
         {
             System.out.print("Event Delete General Exception: " + e.getMessage());
-            connection.rollback();;
+            closeConnection(false);
         }
         finally
         {
@@ -165,7 +175,7 @@ public class EventDAO {
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
         }
-        return false;
+        return success;
     }
 
     /**
@@ -174,26 +184,29 @@ public class EventDAO {
      */
     public Boolean deleteAllEvents() throws SQLException
     {
+        Boolean success = false;
         try {
+            openConnection();
             String sql = "delete from Events";
             stmt = connection.prepareStatement(sql);
 
             if (stmt.executeUpdate() > 0) {
                 System.out.print("Delete successful!");
-                return true;
+                success = true;
             }
 
+            closeConnection(true);
             System.out.print("Delete unsuccessful");
         }
         catch (SQLException e)
         {
             System.out.print("Event DeleteAll SQL Exception: " + e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch (Exception e)
         {
             System.out.print("Event DeleteAll General Exception: " + e.getMessage());
-            connection.rollback();;
+            closeConnection(false);
         }
         finally
         {
@@ -201,12 +214,14 @@ public class EventDAO {
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
         }
-        return false;
+        return success;
     }
 
     public ArrayList<Event> readPersonEvents(String userID) throws SQLException
     {
+        ArrayList<Event> queryEvents = new ArrayList();
         try {
+            openConnection();
             //this would definitely have to be recursive if
             String sql = "select EventID, Descendant, PersonID, Latitude, Longitude, Country, City, EventType, EventYear from Events" +
                     " where Events.Descendant = ?";
@@ -215,8 +230,6 @@ public class EventDAO {
             stmt.setString(1, userID);
 
             keyRS = stmt.executeQuery();
-
-            ArrayList<Event> queryPersons = new ArrayList();
 
             while (keyRS.next()) {
                 Event event = new Event();
@@ -230,24 +243,24 @@ public class EventDAO {
                 event.setEventType(keyRS.getString(8));
                 event.setYear(keyRS.getString(9));
 
-                queryPersons.add(event);
+                queryEvents.add(event);
             }
 
-            if (queryPersons.size() > 0) {
+            if (queryEvents.size() > 0) {
                 System.out.print("Events found!");
-                return queryPersons;
             }
+            closeConnection(true);
             System.out.print("No events found!");
         }
         catch (SQLException e)
         {
             System.out.print("Event ReadPerson SQL Exception: " + e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch (Exception e)
         {
             System.out.print("Event ReadPerson General Exception: " + e.getMessage());
-            connection.rollback();;
+            closeConnection(false);
         }
         finally
         {
@@ -255,12 +268,12 @@ public class EventDAO {
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
         }
+
+        //return
+        if(queryEvents.size() > 0)
+        {
+            return queryEvents;
+        }
         return null;
-    }
-
-
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
     }
 }

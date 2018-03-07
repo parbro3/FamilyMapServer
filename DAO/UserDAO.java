@@ -9,12 +9,11 @@ import java.util.ArrayList;
  * Methods access User table in database.
  */
 
-public class UserDAO {
+public class UserDAO extends DAO{
 
     PreparedStatement stmt = null;
     Statement keyStmt = null;
     ResultSet keyRS = null;
-    private Connection connection = null;
 
     /**
      * Empty constructor for Gson compatibility
@@ -33,6 +32,7 @@ public class UserDAO {
         Boolean success = false;
         try
         {
+            openConnection();
             String sql = "insert into Users (UserName, Password, Email, FirstName, LastName, Gender, PersonID)" +
                     " values (?, ?, ?, ?, ?, ?, ?)";
 
@@ -54,16 +54,17 @@ public class UserDAO {
                 System.out.print("Insert User successful!");
                 success = true;
             }
+            closeConnection(true);
         }
         catch (SQLException e)
         {
             System.out.print("User Insert SQL Exception: " + e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch (Exception e)
         {
             System.out.print("User Insert General Exception: " + e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         finally
         {
@@ -83,7 +84,10 @@ public class UserDAO {
      */
     public User readUser(String userName) throws SQLException
     {
+        ArrayList<User> queryUsers = new ArrayList();
+
         try {
+            openConnection();
             System.out.print("Entered Read User Function! ");
             String sql = "select UserName, Password, Email, FirstName, LastName, Gender, PersonID from Users" +
                     " where Users.UserName = ?";
@@ -92,8 +96,6 @@ public class UserDAO {
             stmt.setString(1, userName);
 
             keyRS = stmt.executeQuery();
-
-            ArrayList<User> queryUsers = new ArrayList();
 
             while (keyRS.next()) {
                 User user = new User();
@@ -110,19 +112,19 @@ public class UserDAO {
 
             if (queryUsers.size() == 1) {
                 System.out.print("User found!");
-                return queryUsers.get(0);
             }
             System.out.print("User not found!");
+            closeConnection(true);
         }
         catch(SQLException e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch(Exception e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         finally
         {
@@ -130,7 +132,13 @@ public class UserDAO {
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
         }
-        System.out.print("Read User: Returning Null\n");
+
+
+        //return
+        if(queryUsers.size() > 0)
+        {
+            return queryUsers.get(0);
+        }
         return null;
     }
 
@@ -141,15 +149,18 @@ public class UserDAO {
      */
     public Boolean deleteUser(String userName) throws SQLException
     {
+        Boolean success = false;
         try {
+            openConnection();
             String sql = "delete from Users where UserName = ?";
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, userName);
 
             if (stmt.executeUpdate() == 1) {
                 System.out.print("Delete Successful!");
-                return true;
+                success = true;
             }
+            closeConnection(true);
             System.out.print("User not found!");
         }
         catch(SQLException e)
@@ -168,7 +179,7 @@ public class UserDAO {
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
         }
-        return false;
+        return success;
     }
 
     /**
@@ -177,26 +188,29 @@ public class UserDAO {
      */
     public Boolean deleteAllUsers() throws SQLException
     {
+        Boolean success = false;
         try {
+            openConnection();
             String sql = "delete from Users";
             stmt = connection.prepareStatement(sql);
 
-            if (stmt.executeUpdate() > 0) {
+            if (stmt.executeUpdate() >= 0) {
                 System.out.print("Delete successful!");
-                return true;
+                success = true;
             }
 
+            closeConnection(true);
             System.out.print("Delete unsuccessful");
         }
         catch(SQLException e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch(Exception e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         finally
         {
@@ -204,10 +218,6 @@ public class UserDAO {
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
         }
-        return false;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
+        return success;
     }
 }

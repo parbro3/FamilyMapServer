@@ -14,12 +14,11 @@ import Model.Person;
  * Methods access Person table in database.
  */
 
-public class PersonDAO {
+public class PersonDAO extends DAO {
 
     PreparedStatement stmt = null;
     Statement keyStmt = null;
     ResultSet keyRS = null;
-    private Connection connection = null;
 
     /**
      * Empty constructor to be accessed by Gson
@@ -38,6 +37,7 @@ public class PersonDAO {
         Boolean success = false;
         try
         {
+            openConnection();
             String sql = "insert into Persons (PersonID, Descendant, FirstName, LastName, Gender, FatherID, MotherID, SpouseID)" +
                     " values (?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = connection.prepareStatement(sql);
@@ -57,16 +57,17 @@ public class PersonDAO {
                 System.out.print("Insert Person successful!");
                 success = true;
             }
+            closeConnection(true);
         }
         catch (SQLException e)
         {
             System.out.print("Person Insert SQL Exception: " + e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch (Exception e)
         {
             System.out.print("Person Insert General Exception: " + e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         finally
         {
@@ -86,8 +87,10 @@ public class PersonDAO {
      */
     public Person readPerson(String personID) throws SQLException
     {
+        ArrayList<Person> queryPersons = new ArrayList();
         try
         {
+            openConnection();
             String sql = "select PersonID, Descendant, FirstName, LastName, Gender, FatherID, MotherID, SpouseID from Persons" +
                     " where Persons.PersonID = ?";
 
@@ -95,8 +98,6 @@ public class PersonDAO {
             stmt.setString(1, personID);
 
             keyRS = stmt.executeQuery();
-
-            ArrayList<Person> queryPersons = new ArrayList();
 
             while (keyRS.next()) {
                 Person person = new Person();
@@ -114,25 +115,31 @@ public class PersonDAO {
 
             if (queryPersons.size() == 1) {
                 System.out.print("Person found!");
-                return queryPersons.get(0);
-        }
+            }
+            closeConnection(true);
             System.out.print("Person not found!");
         }
         catch(SQLException e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch(Exception e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         finally
         {
             if (stmt != null) stmt.close();
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
+        }
+
+        //return
+        if(queryPersons.size() > 0)
+        {
+            return queryPersons.get(0);
         }
         return null;
     }
@@ -143,26 +150,28 @@ public class PersonDAO {
      */
     public Boolean deleteAllPersons() throws SQLException
     {
+        Boolean success = false;
         try {
+            openConnection();
             String sql = "delete from Persons";
             stmt = connection.prepareStatement(sql);
 
-            if (stmt.executeUpdate() > 0) {
+            if (stmt.executeUpdate() >= 0) {
                 System.out.print("Delete successful!");
-                return true;
+                success = true;
             }
-
+            closeConnection(true);
             System.out.print("Delete unsuccessful");
         }
         catch(SQLException e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch(Exception e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         finally
         {
@@ -170,7 +179,7 @@ public class PersonDAO {
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
         }
-        return false;
+        return success;
     }
 
     /**
@@ -180,26 +189,29 @@ public class PersonDAO {
      */
     public Boolean deletePerson(String personID) throws SQLException
     {
+        Boolean success = false;
         try {
+            openConnection();
             String sql = "delete from Persons where PersonID = ?";
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, personID);
 
             if (stmt.executeUpdate() == 1) {
                 System.out.print("Delete Successful!");
-                return true;
+                success = true;
             }
+            closeConnection(true);
             System.out.print("Person not found!");
         }
         catch(SQLException e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch(Exception e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         finally
         {
@@ -207,7 +219,7 @@ public class PersonDAO {
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
         }
-        return false;
+        return success;
     }
 
     /**
@@ -218,7 +230,10 @@ public class PersonDAO {
      */
     public ArrayList<Person> readPersonsFamily(String userID) throws SQLException
     {
+        ArrayList<Person> queryPersons = new ArrayList();
+
         try {
+            openConnection();
             //this would definitely have to be recursive if
             String sql = "select PersonID, Descendant, FirstName, LastName, Gender, FatherID, MotherID, SpouseID from Persons" +
                     " where Persons.Descendant = ?";
@@ -228,7 +243,6 @@ public class PersonDAO {
 
             keyRS = stmt.executeQuery();
 
-            ArrayList<Person> queryPersons = new ArrayList();
 
             while (keyRS.next()) {
                 Person person = new Person();
@@ -246,19 +260,19 @@ public class PersonDAO {
 
             if (queryPersons.size() > 0) {
                 System.out.print("Family members found!");
-                return queryPersons;
             }
+            closeConnection(true);
             System.out.print("No family members found!");
         }
         catch(SQLException e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         catch(Exception e)
         {
             System.out.print(e.getMessage());
-            connection.rollback();
+            closeConnection(false);
         }
         finally
         {
@@ -266,11 +280,13 @@ public class PersonDAO {
             if (keyRS != null) keyRS.close();
             if (keyStmt != null) keyStmt.close();
         }
-        return null;
-    }
 
-    public void setConnection(Connection connection) {
-        this.connection = connection;
+        //return
+        if(queryPersons.size() > 0)
+        {
+            return queryPersons;
+        }
+        return null;
     }
 }
 
