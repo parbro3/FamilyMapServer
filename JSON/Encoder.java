@@ -2,12 +2,16 @@ package JSON;
 
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import Data.LocationData;
 import Service.Request.RegisterRequest;
 
 /**
@@ -33,6 +37,25 @@ public class Encoder {
         return gson.fromJson(json, toJsonClass);
     }
 
+    public Object decodeFile(String fileName, Class toJsonClass)
+    {
+        try
+        {
+            File file = new File(fileName);
+            FileReader fileReader = new FileReader(file);
+            return gson.fromJson(fileReader, toJsonClass);
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.print(e.getMessage());
+        }
+        catch(Exception e)
+        {
+            System.out.print(e.getMessage());
+        }
+        return null;
+    }
+
     public void writeString(String str, OutputStream os) throws IOException {
         OutputStreamWriter sw = new OutputStreamWriter(os);
         sw.write(str);
@@ -49,4 +72,5 @@ public class Encoder {
         }
         return sb.toString();
     }
+
 }

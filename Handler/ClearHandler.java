@@ -48,7 +48,7 @@ public class ClearHandler implements HttpHandler {
 
                 cResult = cService.service(cRequest);
                 respData = encoder.encode(cResult);
-                //String respData = gson.toJson(rResult);
+
                 //send response headers
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 //************************************************

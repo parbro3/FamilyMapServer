@@ -38,7 +38,7 @@ public class EventDAO extends DAO {
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, event.getID());
             stmt.setString(2, event.getDescendant());
-            stmt.setString(3, event.getPerson());
+            stmt.setString(3, event.getPersonID());
             stmt.setString(4, event.getLatitude());
             stmt.setString(5, event.getLongitude());
             stmt.setString(6, event.getCountry());
@@ -97,7 +97,7 @@ public class EventDAO extends DAO {
             while (keyRS.next()) {
                 Event event = new Event();
                 event.setDescendant(keyRS.getString(1));
-                event.setPerson(keyRS.getString(2));
+                event.setPersonID(keyRS.getString(2));
                 event.setLatitude(keyRS.getString(3));
                 event.setLongitude(keyRS.getString(4));
                 event.setCountry(keyRS.getString(5));
@@ -247,7 +247,7 @@ public class EventDAO extends DAO {
                 Event event = new Event();
                 event.setID(keyRS.getString(1));
                 event.setDescendant(keyRS.getString(2));
-                event.setPerson(keyRS.getString(3));
+                event.setPersonID(keyRS.getString(3));
                 event.setLatitude(keyRS.getString(4));
                 event.setLongitude(keyRS.getString(5));
                 event.setCountry(keyRS.getString(6));
