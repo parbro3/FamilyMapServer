@@ -1,5 +1,9 @@
 package Service.Request;
 
+import Model.Event;
+import Model.Person;
+import Model.User;
+
 /**
  * Represents a request object to Clears all data from
  * the database (just like the /clear API), and then loads
@@ -12,15 +16,15 @@ public class LoadRequest {
     /**
      * LoadRequest's users
      */
-    String[] users;
+    User[] users;
     /**
      * LoadRequest's persons
      */
-    String[] persons;
+    Person[] persons;
     /**
      * LoadRequest's events
      */
-    String[] events;
+    Event[] events;
 
     /**
      * Empty constructor
@@ -32,27 +36,27 @@ public class LoadRequest {
         return (getUsers()!= null && getEvents()!=null && getPersons()!= null);
     }
 
-    public String[] getUsers() {
+    public User[] getUsers() {
         return users;
     }
 
-    public void setUsers(String[] users) {
+    public void setUsers(User[] users) {
         this.users = users;
     }
 
-    public String[] getPersons() {
+    public Person[] getPersons() {
         return persons;
     }
 
-    public void setPersons(String[] persons) {
+    public void setPersons(Person[] persons) {
         this.persons = persons;
     }
 
-    public String[] getEvents() {
+    public Event[] getEvents() {
         return events;
     }
 
-    public void setEvents(String[] events) {
+    public void setEvents(Event[] events) {
         this.events = events;
     }
 }
