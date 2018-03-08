@@ -37,7 +37,7 @@ public class AuthTokenDAO extends DAO{
             String sql = "insert into AuthTokens (AuthTokenID, UserName)" +
                     " values (?, ?)";
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, authToken.getID());
+            stmt.setString(1, authToken.getAuthTokenID());
             stmt.setString(2, authToken.getUserName());
 
             //if it inserted a row.
@@ -91,7 +91,7 @@ public class AuthTokenDAO extends DAO{
 
             while (keyRS.next()) {
                 AuthToken authToken = new AuthToken();
-                authToken.setID(keyRS.getString(1));
+                authToken.setAuthTokenID(keyRS.getString(1));
                 authToken.setUserName(keyRS.getString(2));
 
                 queryAuthTokens.add(authToken);

@@ -43,7 +43,7 @@ public class EventIDService {
                 result.setDescendant(event.getDescendant());
                 result.setCity(event.getCity());
                 result.setCountry(event.getCountry());
-                result.setEventID(event.getID());
+                result.setEventID(event.getEventID());
                 result.setEventType(event.getEventType());
                 result.setLatitude(event.getLatitude());
                 result.setLongitude(event.getLongitude());

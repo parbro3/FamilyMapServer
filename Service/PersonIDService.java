@@ -46,7 +46,7 @@ public class PersonIDService {
                 pResult.setLastName(person.getLastName());
                 pResult.setMotherID(person.getMotherID());
                 pResult.setSpouseID(person.getSpouseID());
-                pResult.setPersonID(person.getID());
+                pResult.setPersonID(person.getPersonID());
             }
             else
             {

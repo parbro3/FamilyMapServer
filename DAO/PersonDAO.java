@@ -41,7 +41,7 @@ public class PersonDAO extends DAO {
             String sql = "insert into Persons (PersonID, Descendant, FirstName, LastName, Gender, FatherID, MotherID, SpouseID)" +
                     " values (?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, person.getID());
+            stmt.setString(1, person.getPersonID());
             stmt.setString(2, person.getDescendant());
             stmt.setString(3, person.getFirstName());
             stmt.setString(4, person.getLastName());
@@ -101,7 +101,7 @@ public class PersonDAO extends DAO {
 
             while (keyRS.next()) {
                 Person person = new Person();
-                person.setID(keyRS.getString(1));
+                person.setPersonID(keyRS.getString(1));
                 person.setDescendant(keyRS.getString(2));
                 person.setFirstName(keyRS.getString(4));
                 person.setLastName(keyRS.getString(5));
@@ -257,7 +257,7 @@ public class PersonDAO extends DAO {
 
             while (keyRS.next()) {
                 Person person = new Person();
-                person.setID(keyRS.getString(1));
+                person.setPersonID(keyRS.getString(1));
                 person.setDescendant(keyRS.getString(2));
                 person.setFirstName(keyRS.getString(4));
                 person.setLastName(keyRS.getString(5));

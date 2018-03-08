@@ -50,15 +50,15 @@ public class LoginService {
                         //create the auth token??
                         authToken = new AuthToken();
                         authToken.setUserName(user.getUserName());
-                        authToken.setID(authToken.generateID());
+                        authToken.setAuthTokenID(authToken.generateID());
 
                         //create the auth token in the database!!
                         dao.getAuthTokenDAO().createAuthToken(authToken);
 
 
                         lResult.setUserName(user.getUserName());
-                        lResult.setPersonID(user.getID());
-                        lResult.setAuthToken(authToken.getID());
+                        lResult.setPersonID(user.getUserID());
+                        lResult.setAuthToken(authToken.getAuthTokenID());
 
                         return lResult;
 

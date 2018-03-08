@@ -54,15 +54,15 @@ public class RegisterService{
                         //create the auth token??
                         authToken = new AuthToken();
                         authToken.setUserName(user.getUserName());
-                        authToken.setID(authToken.generateID());
+                        authToken.setAuthTokenID(authToken.generateID());
 
                         //create the auth token in the database!!
                         dao.getAuthTokenDAO().createAuthToken(authToken);
 
                         rResult.setUserName(user.getUserName());
-                        rResult.setPersonID(user.getID());
+                        rResult.setPersonID(user.getUserID());
 
-                        rResult.setAuthToken(authToken.getID());
+                        rResult.setAuthToken(authToken.getAuthTokenID());
                     }
                 } else {
                     rResult.setMessage("Username already taken by another user");

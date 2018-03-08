@@ -1,11 +1,13 @@
 package Model;
 
+import java.util.UUID;
+
 /**
  * Represents a Model class User in memory
  * Only getters and setters because it's a shared dataholder object
  */
 
-public class User extends Model {
+public class User {
 
     /**
      * User's username
@@ -34,7 +36,7 @@ public class User extends Model {
     /**
      * User's ID (UUID)
      */
-    //private String personID;
+    private String userID;
 
 
     /**
@@ -49,7 +51,7 @@ public class User extends Model {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.setID(this.generateID());
+        this.setUserID(this.generateID());
     }
 
     public String getUserName() {
@@ -98,6 +100,17 @@ public class User extends Model {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String generateID()
+    {
+        return UUID.randomUUID().toString();
+    }
+
+    public String getUserID() { return userID; }
+
+    public void setUserID(String ID) {
+        this.userID = ID;
     }
 
     /*
