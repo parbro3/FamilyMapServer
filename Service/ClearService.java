@@ -51,12 +51,12 @@ public class ClearService {
         catch(SQLException e)
         {
             cResult.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
             cResult.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         finally
         {
