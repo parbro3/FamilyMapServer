@@ -92,6 +92,11 @@ public class RegisterService{
         return rResult;
     }
 
+    /**
+     * checks username for authenticity to see if it exists
+     * @param username
+     * @return
+     */
     public Boolean checkUsername(String username)
     {
         try

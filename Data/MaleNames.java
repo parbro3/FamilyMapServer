@@ -1,10 +1,14 @@
 package Data;
 
-/**
- * Created by Parker on 3/7/18.
- */
 
+/**
+ * Reads in malenames from gson. has same format as json file.
+ */
 public class MaleNames {
+
+    /**
+     * male names array
+     */
     String[] data;
 
     public String[] getData() {

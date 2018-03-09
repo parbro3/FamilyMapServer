@@ -230,6 +230,12 @@ public class EventDAO extends DAO {
         return success;
     }
 
+    /**
+     * Reads in all events for a specific user id.
+     * @param userID
+     * @return returns an arraylist of the found events
+     * @throws SQLException
+     */
     public ArrayList<Event> readPersonEvents(String userID) throws SQLException
     {
         ArrayList<Event> queryEvents = new ArrayList();

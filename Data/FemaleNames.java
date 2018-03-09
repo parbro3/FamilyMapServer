@@ -1,10 +1,14 @@
 package Data;
 
 /**
- * Created by Parker on 3/7/18.
+ * Female names class for reading in GSON from file
  */
 
 public class FemaleNames {
+
+    /**
+     * female names array
+     */
     String[] data;
 
     public String[] getData() {

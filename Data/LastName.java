@@ -5,6 +5,9 @@ package Data;
  */
 
 public class LastName {
+    /**
+     * last names array
+     */
     String[] data;
 
     public String[] getData() {

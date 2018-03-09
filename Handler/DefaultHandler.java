@@ -7,14 +7,19 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
-/**
- * Represents the clear handler object instantiated when the /clear api is called
- */
 
+/**
+ * Default handler that returns the webpage for the client
+ * to interact with the server/web api calls
+ */
 public class DefaultHandler implements HttpHandler{
 
     public DefaultHandler(){}
 
+    /**
+     * Reads in the http exchange from the server. Returns the web pages
+     * for the client.
+     */
     @Override
     public void handle(HttpExchange exchange) throws IOException
     {

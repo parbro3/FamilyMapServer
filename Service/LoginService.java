@@ -81,6 +81,11 @@ public class LoginService {
         return lResult;
     }
 
+    /**
+     * checks password for authenticity
+     * @param request
+     * @return
+     */
     public Boolean checkPassword(LoginRequest request)
     {
         try{
@@ -99,6 +104,11 @@ public class LoginService {
         return false;
     }
 
+    /**
+     * checks username to see if it exists
+     * @param username
+     * @return
+     */
     public Boolean checkUsername(String username) {
         try {
             if (dao.getUserDAO().readUser(username) == null) {

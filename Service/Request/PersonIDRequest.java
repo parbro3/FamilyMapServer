@@ -8,7 +8,13 @@ package Service.Request;
 
 public class PersonIDRequest {
 
+    /**
+     * authorization id from auth token
+     */
     String authID;
+    /**
+     * person id to call for returning person
+     */
     String personID;
 
     /**

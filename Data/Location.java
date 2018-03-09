@@ -1,7 +1,7 @@
 package Data;
 
 /**
- * Created by Parker on 3/7/18.
+ * Location class reads in data from gson. has same format as gson file
  */
 
 public class Location {

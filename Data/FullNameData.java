@@ -1,7 +1,7 @@
 package Data;
 
 /**
- * Created by Parker on 3/7/18.
+ * FullNameData class that has all names. read in from gson.
  */
 
 public class FullNameData {

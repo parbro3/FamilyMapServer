@@ -24,6 +24,12 @@ public class EventIDHandler implements HttpHandler {
 
     public EventIDHandler() {}
 
+    /**
+     * Reads in the http exchange from the server. checks for post.
+     * gets data, builds a request, and sends the data over to the service class.
+     * A result is returned and sent back to the client.
+     * @param exchange
+     */
     @Override
     public void handle(HttpExchange exchange)
     {

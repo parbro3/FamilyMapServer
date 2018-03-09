@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Created by Parker on 2/26/18.
- */
 
+/**
+ * Parent class of all DAO objects. initialize() initializes all child DAO objects
+ * shares the same connection among all dao classes
+ */
 public class DAO {
 
     protected static Connection connection = null;
@@ -17,10 +18,16 @@ public class DAO {
     private AuthTokenDAO authTokenDAO = null;
 
 
+    /**
+     * empty constructor
+     */
     public DAO()
     {
     }
 
+    /**
+     * initializes all dao objects
+     */
     public void initialize()
     {
         try {
@@ -39,6 +46,9 @@ public class DAO {
         }
     }
 
+    /**
+     * Opens a connection in the FMDB database
+     */
     public void openConnection()
     {
         String dbName = "FMDB.db";
@@ -55,6 +65,10 @@ public class DAO {
         }
     }
 
+    /**
+     * closes a connection in the FMDB database
+     * @param commit
+     */
     public void closeConnection(boolean commit) {
         try {
             if (commit) {

@@ -7,8 +7,14 @@ package Service.Request;
 
 public class FillRequest {
 
+    /**
+     * number of generations to fill
+     */
     int generations;
 
+    /**
+     * username to fill for
+     */
     String userName;
 
     /**

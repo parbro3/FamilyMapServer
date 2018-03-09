@@ -9,6 +9,9 @@ package Service.Request;
 
 public class PersonRequest {
 
+    /**
+     * auth id to find the descendant to pull the persons
+     */
     String authID;
 
     /**

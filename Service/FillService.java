@@ -36,15 +36,39 @@ import JSON.Encoder;
 
 public class FillService {
 
+    /**
+     * dao for connection access
+     */
     DAO dao = new DAO();
+    /**
+     * randomizer for creating years in given bounds
+     */
     Random random = new Random();
+    /**
+     * location data class to be instantiated
+     */
     LocationData locData = null;
+    /**
+     * malenames class containt all male names to be instantiated
+     */
     MaleNames mNames = null;
+    /**
+     * last names to be instantiated
+     */
     LastName lNames = null;
+    /**
+     * femalenames to be instantiated
+     */
     FemaleNames fNames = null;
 
     //number of adds data
+    /**
+     * person counter for adding
+     */
     int personAdds = 0;
+    /**
+     * event counter for adding
+     */
     int eventAdds = 0;
 
 
@@ -141,6 +165,10 @@ public class FillService {
         return result;
     }
 
+    /**
+     * reads all names and locations into memory to be accessed
+     * for creating locations and persons
+     */
     public void readData()
     {
         Encoder encoder = new Encoder();
@@ -151,6 +179,14 @@ public class FillService {
 
     }
 
+    /**
+     * Recursive calling function to create spouses, fathers, mothers of the incoming person
+     * Recursion necessary to fill generations.
+     * @param person
+     * @param generations
+     * @param birthYear
+     * @throws SQLException
+     */
     public void generationCreator(Person person, int generations, int birthYear) throws SQLException
     {
         //create a father...
@@ -188,12 +224,24 @@ public class FillService {
 
     }
 
+    /**
+     * simple function to set the spouse ids of the married couple
+     * @param father
+     * @param mother
+     */
     public void marry(Person father, Person mother)
     {
         father.setSpouseID(mother.getPersonID());
         mother.setSpouseID(father.getPersonID());
     }
 
+    /**
+     * creates a person. passes in child so descendant is consistent.
+     * @param child
+     * @param gender
+     * @return
+     * @throws SQLException
+     */
     public Person createPerson(Person child, String gender) throws SQLException
     {
         Person person = new Person();
@@ -215,6 +263,13 @@ public class FillService {
     }
 
 
+    /**
+     * creates and returns an array list after adding the events to the database by calling bdm()
+     * @param person
+     * @param birthYear
+     * @return
+     * @throws SQLException
+     */
     //returns an array list of the created events.
     public ArrayList<Event> generateEvents(Person person, int birthYear) throws SQLException
     {
@@ -226,6 +281,14 @@ public class FillService {
         return events;
     }
 
+    /**
+     * creates and adds an event to the database given birth year and event type
+     * @param person
+     * @param birthYear
+     * @param eventType
+     * @return
+     * @throws SQLException
+     */
     public Event bdmEvent(Person person, int birthYear, String eventType) throws SQLException
     {
         Event event = new Event();
@@ -247,8 +310,11 @@ public class FillService {
         return event;
     }
 
-
-
+    /**
+     * checks username for authenticity.
+     * @param username
+     * @return
+     */
     public Boolean checkUsername(String username) {
         try {
             if (dao.getUserDAO().readUser(username) == null) {

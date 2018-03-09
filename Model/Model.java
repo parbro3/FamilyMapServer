@@ -3,7 +3,8 @@ package Model;
 import java.util.UUID;
 
 /**
- * Created by Parker on 2/17/18.
+ * Currently unused.
+ * Model class that model classes inherit from for ID generation
  */
 
 public class Model {
