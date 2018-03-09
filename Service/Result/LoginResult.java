@@ -10,7 +10,7 @@ public class LoginResult implements Result {
     /**
      * LoginResult's error message
      */
-    String errorMessage;
+    String message;
     /**
      * LoginResult's authorization token (UUID)
      */
@@ -30,12 +30,12 @@ public class LoginResult implements Result {
     public LoginResult() {
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getAuthToken() {

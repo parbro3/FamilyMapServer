@@ -1,11 +1,13 @@
 package Model;
 
+import java.util.UUID;
+
 /**
  * Represents a Model class Person in memory
  * Only getters and setters because it's a shared dataholder object
  */
 
-public class Person extends Model {
+public class Person {
 
     /**
      * Person's owner/descendant
@@ -36,6 +38,8 @@ public class Person extends Model {
      */
     String spouseID;
 
+    String personID;
+
     /**
      * Empty constructor to be accessed by Gson
      */
@@ -48,7 +52,7 @@ public class Person extends Model {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.setID(this.generateID());
+        this.setPersonID(this.generateID());
     }
 
     //with already created personID.. doesn't include father, mother, spouse id because they are optional
@@ -58,7 +62,7 @@ public class Person extends Model {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.setID(personID);
+        this.setPersonID(personID);
     }
 
     public String getDescendant() {
@@ -115,5 +119,16 @@ public class Person extends Model {
 
     public void setSpouseID(String spouseID) {
         this.spouseID = spouseID;
+    }
+
+    public String generateID()
+    {
+        return UUID.randomUUID().toString();
+    }
+
+    public String getPersonID() { return personID; }
+
+    public void setPersonID(String ID) {
+        this.personID = ID;
     }
 }

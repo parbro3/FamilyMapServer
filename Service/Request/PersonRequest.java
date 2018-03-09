@@ -9,6 +9,8 @@ package Service.Request;
 
 public class PersonRequest {
 
+    String authID;
+
     /**
      * Empty constructor
      */
@@ -16,4 +18,11 @@ public class PersonRequest {
 
     }
 
+    public String getAuthID() {
+        return authID;
+    }
+
+    public void setAuthID(String authID) {
+        this.authID = authID;
+    }
 }

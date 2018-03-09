@@ -46,7 +46,7 @@ public class EventIDResult implements Result {
     /**
      * EventIDResult's error message
      */
-    String errorMessage;
+    String message;
 
 
     /**
@@ -127,11 +127,11 @@ public class EventIDResult implements Result {
         this.year = year;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String errorMessage) {
+        this.message = errorMessage;
     }
 }

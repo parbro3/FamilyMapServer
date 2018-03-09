@@ -5,7 +5,7 @@ package Service.Result;
  * depending on the outcome of the PersonID service.
  */
 
-public class PersonIDResult  implements Result{
+public class PersonIDResult implements Result{
 
     /**
      * PersonIDResult's descendant
@@ -32,7 +32,7 @@ public class PersonIDResult  implements Result{
      */
     String fatherID;
     /**
-     * PersonIDResult's mother's id (UUID)
+     * PersonIDRessult's mother's id (UUID)
      */
     String motherID;
     /**
@@ -42,7 +42,7 @@ public class PersonIDResult  implements Result{
     /**
      * PersonIDResult's error message
      */
-    String errorMessage;
+    String message;
 
     /**
      * Empty constructor
@@ -114,11 +114,11 @@ public class PersonIDResult  implements Result{
         this.spouseID = spouseID;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String errorMessage) {
+        this.message = errorMessage;
     }
 }

@@ -20,10 +20,17 @@ public class DefaultHandler implements HttpHandler{
     {
         System.out.print("Default Handler!\n");
 
-        File file = new File("web/index.html");
+        String path = exchange.getRequestURI().getPath();
+        if (path.equals("/") || path.length()==0)
+        {
+            path = "/index.html";
+        }
+        File file = new File("web" + path);
+
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
         OutputStream output = exchange.getResponseBody();
         FileInputStream fs = new FileInputStream(file);
+
 
         final byte[] buffer = new byte[0x10000];
         int count = 0;
@@ -36,4 +43,7 @@ public class DefaultHandler implements HttpHandler{
         output.close();
         fs.close();
     }
+
+
+
 }
