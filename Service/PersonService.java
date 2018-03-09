@@ -48,7 +48,7 @@ public class PersonService {
                 System.out.print("authToken is not null! ");
 
                 User user = dao.getUserDAO().readUser(authToken.getUserName());
-                ArrayList<Person> persons = dao.getPersonDAO().readPersonsFamily(user.getID());
+                ArrayList<Person> persons = dao.getPersonDAO().readPersonsFamily(user.getUserName());
 
                 Person[] personArray = new Person[persons.size()];
                 personArray = persons.toArray(personArray);

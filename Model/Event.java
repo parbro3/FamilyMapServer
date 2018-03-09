@@ -1,11 +1,13 @@
 package Model;
 
+import java.util.UUID;
+
 /**
  * Represents a Model class Event in memory
  * Only getters and setters because it's a shared dataholder object
  */
 
-public class Event extends Model {
+public class Event {
 
     /**
      * Event's descendant/owner
@@ -40,6 +42,8 @@ public class Event extends Model {
      */
     private String year;
 
+    private String eventID;
+
     /**
      * Empty constructor to be accessed by Gson
      */
@@ -55,7 +59,7 @@ public class Event extends Model {
         this.city = city;
         this.eventType = eventType;
         this.year = year;
-        this.setID(this.generateID());
+        this.setEventID(this.generateID());
     }
 
     public String getDescendant() {
@@ -120,5 +124,16 @@ public class Event extends Model {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public String generateID()
+    {
+        return UUID.randomUUID().toString();
+    }
+
+    public String getEventID() { return eventID; }
+
+    public void setEventID(String ID) {
+        this.eventID = ID;
     }
 }

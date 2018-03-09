@@ -36,7 +36,7 @@ public class EventDAO extends DAO {
             String sql = "insert into Events (EventID, Descendant, PersonID, Latitude, Longitude, Country, City, EventType, EventYear)" +
                     " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, event.getID());
+            stmt.setString(1, event.getEventID());
             stmt.setString(2, event.getDescendant());
             stmt.setString(3, event.getPersonID());
             stmt.setString(4, event.getLatitude());
@@ -96,14 +96,15 @@ public class EventDAO extends DAO {
 
             while (keyRS.next()) {
                 Event event = new Event();
-                event.setDescendant(keyRS.getString(1));
-                event.setPersonID(keyRS.getString(2));
-                event.setLatitude(keyRS.getString(3));
-                event.setLongitude(keyRS.getString(4));
-                event.setCountry(keyRS.getString(5));
-                event.setCity(keyRS.getString(6));
-                event.setEventType(keyRS.getString(7));
-                event.setYear(keyRS.getString(8));
+                event.setEventID(keyRS.getString(1));
+                event.setDescendant(keyRS.getString(2));
+                event.setPersonID(keyRS.getString(3));
+                event.setLatitude(keyRS.getString(4));
+                event.setLongitude(keyRS.getString(5));
+                event.setCountry(keyRS.getString(6));
+                event.setCity(keyRS.getString(7));
+                event.setEventType(keyRS.getString(8));
+                event.setYear(keyRS.getString(9));
 
                 queryEvents.add(event);
             }
@@ -245,7 +246,7 @@ public class EventDAO extends DAO {
 
             while (keyRS.next()) {
                 Event event = new Event();
-                event.setID(keyRS.getString(1));
+                event.setEventID(keyRS.getString(1));
                 event.setDescendant(keyRS.getString(2));
                 event.setPersonID(keyRS.getString(3));
                 event.setLatitude(keyRS.getString(4));

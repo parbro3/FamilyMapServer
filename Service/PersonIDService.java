@@ -29,7 +29,7 @@ public class PersonIDService {
      */
     public PersonIDResult service(PersonIDRequest request ){
 
-        PersonIDResult pResult = null;
+        PersonIDResult pResult = new PersonIDResult();
 
         try
         {
@@ -37,7 +37,6 @@ public class PersonIDService {
             //if the check was good....
             String checkAuthResult = checkAuth(request.getPersonID(), request.getAuthID());
             if (checkAuthResult.equals("good")) {
-                pResult = new PersonIDResult();
                 Person person = dao.getPersonDAO().readPerson(request.getPersonID());
                 pResult.setDescendant(person.getDescendant());
                 pResult.setFatherID(person.getFatherID());
@@ -46,7 +45,7 @@ public class PersonIDService {
                 pResult.setLastName(person.getLastName());
                 pResult.setMotherID(person.getMotherID());
                 pResult.setSpouseID(person.getSpouseID());
-                pResult.setPersonID(person.getID());
+                pResult.setPersonID(person.getPersonID());
             }
             else
             {

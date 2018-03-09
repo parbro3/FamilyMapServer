@@ -45,7 +45,7 @@ public class UserDAO extends DAO{
             stmt.setString(4, user.getFirstName());
             stmt.setString(5, user.getLastName());
             stmt.setString(6, user.getGender());
-            stmt.setString(7, user.getID());
+            stmt.setString(7, user.getPersonID());
 
 
             //if it inserted a row.
@@ -105,7 +105,7 @@ public class UserDAO extends DAO{
                 user.setFirstName(keyRS.getString(4));
                 user.setLastName(keyRS.getString(5));
                 user.setGender(keyRS.getString(6));
-                user.setID(keyRS.getString(7));
+                user.setPersonID(keyRS.getString(7));
 
                 queryUsers.add(user);
             }

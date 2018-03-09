@@ -50,7 +50,7 @@ public class EventService {
                     System.out.print("authToken is not null! ");
 
                     User user = dao.getUserDAO().readUser(authToken.getUserName());
-                    ArrayList<Event> events = dao.getEventDAO().readPersonEvents(user.getID());
+                    ArrayList<Event> events = dao.getEventDAO().readPersonEvents(user.getUserName());
 
                     Event[] personArray = new Event[events.size()];
                     personArray = events.toArray(personArray);

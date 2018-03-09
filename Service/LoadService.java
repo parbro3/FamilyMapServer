@@ -44,19 +44,27 @@ public class LoadService {
             int userCount = 0;
             int personCount = 0;
             int eventCount = 0;
-            for(int i = 0; i < request.getUsers().length; i++, userCount++)
+            if(request.getUsers() != null && request.getPersons() != null && request.getEvents() != null)
             {
-                dao.getUserDAO().createUser(request.getUsers()[i]);
+                for(int i = 0; i < request.getUsers().length; i++, userCount++)
+                {
+                    dao.getUserDAO().createUser(request.getUsers()[i]);
+                }
+                for(int i = 0; i < request.getPersons().length; i++, personCount++)
+                {
+                    dao.getPersonDAO().createPerson(request.getPersons()[i]);
+                }
+                for(int i = 0; i < request.getEvents().length; i++, eventCount++)
+                {
+                    dao.getEventDAO().createEvent(request.getEvents()[i]);
+                }
+                result.setMessage("Successfully added "+userCount+" users, "+personCount+" persons, and "+eventCount+" events to the database.");
             }
-            for(int i = 0; i < request.getPersons().length; i++, personCount++)
+            else
             {
-                dao.getPersonDAO().createPerson(request.getPersons()[i]);
+                result.setMessage("Must include an array of users, persons, and events");
             }
-            for(int i = 0; i < request.getEvents().length; i++, eventCount++)
-            {
-                dao.getEventDAO().createEvent(request.getEvents()[i]);
-            }
-            result.setMessage("Successfully added "+userCount+" users, "+personCount+" persons, and "+eventCount+" events to the database.");
+
         }
         catch(Exception e)
         {

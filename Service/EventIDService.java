@@ -30,10 +30,11 @@ public class EventIDService {
      */
     public EventIDResult service(EventIDRequest request){
 
-        EventIDResult result = null;
+        EventIDResult result = new EventIDResult();
 
         try
         {
+            dao.initialize();
             System.out.print("Entered EventID Service Function!");
             //if the check was good....
             String checkAuthResult = checkAuth(request.getEventID(), request.getAuthID());
@@ -43,7 +44,7 @@ public class EventIDService {
                 result.setDescendant(event.getDescendant());
                 result.setCity(event.getCity());
                 result.setCountry(event.getCountry());
-                result.setEventID(event.getID());
+                result.setEventID(event.getEventID());
                 result.setEventType(event.getEventType());
                 result.setLatitude(event.getLatitude());
                 result.setLongitude(event.getLongitude());
@@ -81,7 +82,6 @@ public class EventIDService {
     {
         try
         {
-            dao.initialize();
             AuthToken authToken = dao.getAuthTokenDAO().readAuthToken(authID);
             Event event = dao.getEventDAO().readEvent(eventID);
 
