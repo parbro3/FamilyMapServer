@@ -22,7 +22,7 @@ public class LoginHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) {
-        System.out.print("Register Handler!\n");
+        //System.out.print("Register Handler!\n");
 
         Boolean success = false;
         LoginResult lResult = null;
@@ -41,7 +41,7 @@ public class LoginHandler implements HttpHandler {
                 String reqData = encoder.readString(reqBody);
 
                 //print json data
-                System.out.println("Data\n" + reqData + "\n");
+                //System.out.println("Data\n" + reqData + "\n");
 
                 //****************************************************
 
@@ -75,7 +75,7 @@ public class LoginHandler implements HttpHandler {
                 success = true;
             }
         } catch (Exception e) {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
     }

@@ -30,7 +30,7 @@ public class LoadService {
      */
     public LoadResult service(LoadRequest request ){
 
-        System.out.print("Entered Event service function!");
+        //System.out.print("Entered Event service function!");
 
         LoadResult result = new LoadResult();
         try
@@ -69,7 +69,7 @@ public class LoadService {
         catch(Exception e)
         {
             result.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
         return result;

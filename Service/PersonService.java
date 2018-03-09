@@ -34,7 +34,7 @@ public class PersonService {
      */
     public PersonResult service(PersonRequest request )
     {
-        System.out.print("Entered Person service function!" );
+        //System.out.print("Entered Person service function!" );
 
         PersonResult pResult = new PersonResult();
 
@@ -42,10 +42,10 @@ public class PersonService {
         try
         {
             dao.initialize();
-            System.out.print("looking for authtoken: " + request.getAuthID());
+            //System.out.print("looking for authtoken: " + request.getAuthID());
             AuthToken authToken = dao.getAuthTokenDAO().readAuthToken(request.getAuthID());
             if (authToken != null) {
-                System.out.print("authToken is not null! ");
+                //System.out.print("authToken is not null! ");
 
                 User user = dao.getUserDAO().readUser(authToken.getUserName());
                 ArrayList<Person> persons = dao.getPersonDAO().readPersonsFamily(user.getUserName());
@@ -62,12 +62,12 @@ public class PersonService {
         catch(SQLException e)
         {
             pResult.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
             pResult.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         return pResult;
     }

@@ -35,7 +35,7 @@ public class DAO {
 
         }
         catch(ClassNotFoundException e) {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
     }
 
@@ -51,7 +51,7 @@ public class DAO {
             connection.setAutoCommit(false);
         }
         catch (SQLException e) {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
     }
 
@@ -68,7 +68,7 @@ public class DAO {
             connection = null;
         }
         catch (SQLException e) {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
     }
 

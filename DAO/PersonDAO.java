@@ -54,19 +54,19 @@ public class PersonDAO extends DAO {
             //if it inserted a row.
             if (stmt.executeUpdate() == 1)
             {
-                System.out.print("Insert Person successful!");
+                //System.out.print("Insert Person successful!");
                 success = true;
             }
             closeConnection(true);
         }
         catch (SQLException e)
         {
-            System.out.print("Person Insert SQL Exception: " + e.getMessage());
+            //System.out.print("Person Insert SQL Exception: " + e.getMessage());
             closeConnection(false);
         }
         catch (Exception e)
         {
-            System.out.print("Person Insert General Exception: " + e.getMessage());
+            //System.out.print("Person Insert General Exception: " + e.getMessage());
             closeConnection(false);
         }
         finally
@@ -114,22 +114,22 @@ public class PersonDAO extends DAO {
             }
 
             if (queryPersons.size() == 1) {
-                System.out.print("Person found!");
+                //System.out.print("Person found!");
             }
             else {
-                System.out.print("Person not found!");
+                //System.out.print("Person not found!");
             }
             closeConnection(true);
 
         }
         catch(SQLException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         finally
@@ -160,24 +160,24 @@ public class PersonDAO extends DAO {
             stmt = connection.prepareStatement(sql);
 
             if (stmt.executeUpdate() >= 0) {
-                System.out.print("Delete successful!");
+                //System.out.print("Delete successful!");
                 success = true;
             }
             else
             {
-                System.out.print("Delete unsuccessful");
+                //System.out.print("Delete unsuccessful");
             }
             closeConnection(true);
 
         }
         catch(SQLException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         finally
@@ -204,24 +204,24 @@ public class PersonDAO extends DAO {
             stmt.setString(1, personID);
 
             if (stmt.executeUpdate() == 1) {
-                System.out.print("Delete Successful!");
+                //System.out.print("Delete Successful!");
                 success = true;
             }
             else
             {
-                System.out.print("Person not found!");
+                //System.out.print("Person not found!");
             }
             closeConnection(true);
 
         }
         catch(SQLException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         finally
@@ -270,23 +270,23 @@ public class PersonDAO extends DAO {
             }
 
             if (queryPersons.size() > 0) {
-                System.out.print("Family members found!");
+                //System.out.print("Family members found!");
             }
             else
             {
-                System.out.print("No family members found!");
+                //System.out.print("No family members found!");
             }
             closeConnection(true);
 
         }
         catch(SQLException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         finally

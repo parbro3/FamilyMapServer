@@ -36,9 +36,9 @@ public class UserDAO extends DAO{
             String sql = "insert into Users (UserName, Password, Email, FirstName, LastName, Gender, PersonID)" +
                     " values (?, ?, ?, ?, ?, ?, ?)";
 
-            System.out.print("before prepare statement\n");
+            //System.out.print("before prepare statement\n");
             stmt = connection.prepareStatement(sql);
-            System.out.print("after prepare statement\n");
+            //System.out.print("after prepare statement\n");
             stmt.setString(1, user.getUserName());
             stmt.setString(2, user.getPassword());
             stmt.setString(3, user.getEmail());
@@ -51,19 +51,19 @@ public class UserDAO extends DAO{
             //if it inserted a row.
             if (stmt.executeUpdate() == 1)
             {
-                System.out.print("Insert User successful!");
+                //System.out.print("Insert User successful!");
                 success = true;
             }
             closeConnection(true);
         }
         catch (SQLException e)
         {
-            System.out.print("User Insert SQL Exception: " + e.getMessage());
+            //System.out.print("User Insert SQL Exception: " + e.getMessage());
             closeConnection(false);
         }
         catch (Exception e)
         {
-            System.out.print("User Insert General Exception: " + e.getMessage());
+            //System.out.print("User Insert General Exception: " + e.getMessage());
             closeConnection(false);
         }
         finally
@@ -88,7 +88,7 @@ public class UserDAO extends DAO{
 
         try {
             openConnection();
-            System.out.print("Entered Read User Function! ");
+            //System.out.print("Entered Read User Function! ");
             String sql = "select UserName, Password, Email, FirstName, LastName, Gender, PersonID from Users" +
                     " where Users.UserName = ?";
 
@@ -111,21 +111,21 @@ public class UserDAO extends DAO{
             }
 
             if (queryUsers.size() == 1) {
-                System.out.print("User found!");
+                //System.out.print("User found!");
             }
             else {
-                System.out.print("User not found!");
+                //System.out.print("User not found!");
             }
             closeConnection(true);
         }
         catch(SQLException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         finally
@@ -159,24 +159,24 @@ public class UserDAO extends DAO{
             stmt.setString(1, userName);
 
             if (stmt.executeUpdate() == 1) {
-                System.out.print("Delete Successful!");
+                //System.out.print("Delete Successful!");
                 success = true;
             }
             else
             {
-                System.out.print("User not found!");
+                //System.out.print("User not found!");
             }
             closeConnection(true);
 
         }
         catch(SQLException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             connection.rollback();
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             connection.rollback();
         }
         finally
@@ -201,23 +201,23 @@ public class UserDAO extends DAO{
             stmt = connection.prepareStatement(sql);
 
             if (stmt.executeUpdate() >= 0) {
-                System.out.print("Delete successful!");
+                //System.out.print("Delete successful!");
                 success = true;
             }
             else
             {
-                System.out.print("Delete unsuccessful");
+                //System.out.print("Delete unsuccessful");
             }
             closeConnection(true);
         }
         catch(SQLException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         finally

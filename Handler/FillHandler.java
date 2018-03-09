@@ -21,7 +21,7 @@ public class FillHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange)
     {
-        System.out.print("Register Handler!\n");
+        //System.out.print("Register Handler!\n");
 
         Boolean success = false;
         FillResult result = null;
@@ -37,7 +37,7 @@ public class FillHandler implements HttpHandler {
                 //get id from url
                 URI url = exchange.getRequestURI();
                 String urlString = url.toString();
-                System.out.print("URL: " + urlString);
+                //System.out.print("URL: " + urlString);
                 String[] urlParameters = urlString.split("/");
                 String userName = urlParameters[2];
 
@@ -87,7 +87,7 @@ public class FillHandler implements HttpHandler {
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
     }

@@ -22,7 +22,7 @@ public class PersonHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange)
     {
-        System.out.print("Person Handler!\n");
+        //System.out.print("Person Handler!\n");
 
         Boolean success = false;
         PersonResult pResult = null;
@@ -76,7 +76,7 @@ public class PersonHandler implements HttpHandler {
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
     }

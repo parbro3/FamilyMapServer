@@ -21,7 +21,7 @@ public class RegisterHandler implements HttpHandler{
     @Override
     public void handle(HttpExchange exchange)
     {
-        System.out.print("Register Handler!\n");
+        //System.out.print("Register Handler!\n");
 
         Boolean success = false;
         RegisterResult rResult = null;
@@ -48,7 +48,7 @@ public class RegisterHandler implements HttpHandler{
                 String reqData = encoder.readString(reqBody);
 
                 //print json data
-                System.out.println("Data\n" + reqData + "\n");
+                //System.out.println("Data\n" + reqData + "\n");
 
                 //****************************************************
 
@@ -87,7 +87,7 @@ public class RegisterHandler implements HttpHandler{
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
     }

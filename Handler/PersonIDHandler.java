@@ -25,7 +25,7 @@ public class PersonIDHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange)
     {
-        System.out.print("PersonID Handler!\n");
+        //System.out.print("PersonID Handler!\n");
 
         Boolean success = false;
         PersonIDResult pidResult = null;
@@ -42,7 +42,7 @@ public class PersonIDHandler implements HttpHandler {
                 //get id from url
                 URI url = exchange.getRequestURI();
                 String urlString = url.toString();
-                System.out.print("URL: " + urlString);
+                //System.out.print("URL: " + urlString);
                 String[] urlParameters = urlString.split("/");
 
                 //get auth token from header
@@ -122,7 +122,7 @@ public class PersonIDHandler implements HttpHandler {
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
     }

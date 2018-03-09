@@ -18,7 +18,7 @@ public class DefaultHandler implements HttpHandler{
     @Override
     public void handle(HttpExchange exchange) throws IOException
     {
-        System.out.print("Default Handler!\n");
+        //System.out.print("Default Handler!\n");
 
         String path = exchange.getRequestURI().getPath();
         if (path.equals("/") || path.length()==0)

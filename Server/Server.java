@@ -34,7 +34,7 @@ public class Server {
 
     private void run(String portNumber)
     {
-        System.out.print("Initializing HTTP Server\n");
+        //System.out.print("Initializing HTTP Server\n");
 
         try
         {
@@ -52,7 +52,7 @@ public class Server {
         // This line is necessary, but its function is unimportant for our purposes.
         server.setExecutor(null);
 
-        System.out.println("Creating contexts");
+        //System.out.println("Creating contexts");
         server.createContext("/user/register", new RegisterHandler());
         server.createContext("/user/login", new LoginHandler());
         server.createContext("/clear", new ClearHandler());
@@ -67,12 +67,12 @@ public class Server {
 
         // Log message indicating that the HttpServer is about the start accepting
         // incoming client connections.
-        System.out.println("Starting server");
+        //System.out.println("Starting server");
 
         server.start();
 
         // Log message indicating that the server has successfully started.
-        System.out.println("Server started");
+        //System.out.println("Server started");
     }
 
 

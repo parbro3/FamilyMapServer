@@ -35,7 +35,7 @@ public class EventIDService {
         try
         {
             dao.initialize();
-            System.out.print("Entered EventID Service Function!");
+            //System.out.print("Entered EventID Service Function!");
             //if the check was good....
             String checkAuthResult = checkAuth(request.getEventID(), request.getAuthID());
             if (checkAuthResult.equals("good")) {
@@ -59,12 +59,12 @@ public class EventIDService {
         catch(SQLException e)
         {
             result.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
             result.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
         return result;
@@ -112,11 +112,11 @@ public class EventIDService {
         }
         catch(SQLException e)
         {
-            System.out.print("Internal Server Error: " + e.getMessage());
+            //System.out.print("Internal Server Error: " + e.getMessage());
         }
         catch(Exception e)
         {
-            System.out.print("Internal Server Error: " + e.getMessage());
+            //System.out.print("Internal Server Error: " + e.getMessage());
         }
         return null;
     }

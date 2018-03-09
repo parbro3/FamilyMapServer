@@ -33,7 +33,7 @@ public class PersonIDService {
 
         try
         {
-            System.out.print("Entered PersonID Service Function!");
+            //System.out.print("Entered PersonID Service Function!");
             //if the check was good....
             String checkAuthResult = checkAuth(request.getPersonID(), request.getAuthID());
             if (checkAuthResult.equals("good")) {
@@ -54,11 +54,11 @@ public class PersonIDService {
         }
         catch(SQLException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
         return pResult;
@@ -106,11 +106,11 @@ public class PersonIDService {
         }
         catch(SQLException e)
         {
-            System.out.print("Internal Server Error: " + e.getMessage());
+            //System.out.print("Internal Server Error: " + e.getMessage());
         }
         catch(Exception e)
         {
-            System.out.print("Internal Server Error: " + e.getMessage());
+            //System.out.print("Internal Server Error: " + e.getMessage());
         }
         return null;
     }

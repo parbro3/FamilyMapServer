@@ -43,19 +43,19 @@ public class AuthTokenDAO extends DAO{
             //if it inserted a row.
             if (stmt.executeUpdate() == 1)
             {
-                //System.out.print("Insert AuthToken successful!");
+                ////System.out.print("Insert AuthToken successful!");
                 success = true;
             }
             closeConnection(true);
         }
         catch (SQLException e)
         {
-            //System.out.print("AuthToken Insert SQL Exception: " + e.getMessage());
+            ////System.out.print("AuthToken Insert SQL Exception: " + e.getMessage());
             closeConnection(false);
         }
         catch (Exception e)
         {
-            //System.out.print("AuthToken Insert General Exception: " + e.getMessage());
+            ////System.out.print("AuthToken Insert General Exception: " + e.getMessage());
             closeConnection(false);
         }
         finally
@@ -80,7 +80,7 @@ public class AuthTokenDAO extends DAO{
 
         try {
             openConnection();
-            //System.out.print("Entered AuthToken read function\n");
+            ////System.out.print("Entered AuthToken read function\n");
             String sql = "select AuthTokenID, UserName from AuthTokens" +
                     " where AuthTokens.AuthTokenID = ?";
 
@@ -98,23 +98,23 @@ public class AuthTokenDAO extends DAO{
             }
 
             if (queryAuthTokens.size() == 1) {
-                //System.out.print("AuthToken found!");
+                ////System.out.print("AuthToken found!");
             }
             else
             {
-                //System.out.print("AuthToken not found!");
+                ////System.out.print("AuthToken not found!");
             }
             closeConnection(true);
 
         }
         catch(SQLException e)
         {
-            //System.out.print(e.getMessage());
+            ////System.out.print(e.getMessage());
             closeConnection(false);
         }
         catch(Exception e)
         {
-            //System.out.print(e.getMessage());
+            ////System.out.print(e.getMessage());
             closeConnection(false);
         }
         finally
@@ -145,24 +145,24 @@ public class AuthTokenDAO extends DAO{
             stmt = connection.prepareStatement(sql);
 
             if (stmt.executeUpdate() > 0) {
-                //System.out.print("Delete successful!");
+                ////System.out.print("Delete successful!");
                 success = true;
             }
             else
             {
-                //System.out.print("Delete unsuccessful");
+                ////System.out.print("Delete unsuccessful");
             }
 
             closeConnection(true);
         }
         catch(SQLException e)
         {
-            //System.out.print(e.getMessage());
+            ////System.out.print(e.getMessage());
             closeConnection(false);
         }
         catch(Exception e)
         {
-            //System.out.print(e.getMessage());
+            ////System.out.print(e.getMessage());
             closeConnection(false);
         }
         finally
@@ -189,24 +189,24 @@ public class AuthTokenDAO extends DAO{
             stmt.setString(1, authID);
 
             if (stmt.executeUpdate() == 1) {
-                System.out.print("Delete Successful!");
+                //System.out.print("Delete Successful!");
                 success = true;
             }
             else
             {
-                System.out.print("AuthToken not found!");
+                //System.out.print("AuthToken not found!");
             }
             closeConnection(true);
 
         }
         catch(SQLException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
             closeConnection(false);
         }
         finally

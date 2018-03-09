@@ -49,19 +49,19 @@ public class EventDAO extends DAO {
             //if it inserted a row.
             if (stmt.executeUpdate() == 1)
             {
-                System.out.print("Insert Event successful!");
+                //System.out.print("Insert Event successful!");
                 success = true;
             }
             closeConnection(true);
         }
         catch (SQLException e)
         {
-            System.out.print("Event Insert SQL Exception: " + e.getMessage());
+            //System.out.print("Event Insert SQL Exception: " + e.getMessage());
             closeConnection(false);
         }
         catch (Exception e)
         {
-            System.out.print("Event Insert General Exception: " + e.getMessage());
+            //System.out.print("Event Insert General Exception: " + e.getMessage());
             closeConnection(false);
         }
         finally
@@ -110,23 +110,23 @@ public class EventDAO extends DAO {
             }
 
             if (queryEvents.size() == 1) {
-                System.out.print("Event found!");
+                //System.out.print("Event found!");
             }
             else
             {
-                System.out.print("Event not found!");
+                //System.out.print("Event not found!");
             }
             closeConnection(true);
 
         }
         catch (SQLException e)
         {
-            System.out.print("Event Read SQL Exception: " + e.getMessage());
+            //System.out.print("Event Read SQL Exception: " + e.getMessage());
             closeConnection(false);
         }
         catch (Exception e)
         {
-            System.out.print("Event Read General Exception: " + e.getMessage());
+            //System.out.print("Event Read General Exception: " + e.getMessage());
             closeConnection(false);
         }
         finally
@@ -158,24 +158,24 @@ public class EventDAO extends DAO {
             stmt.setString(1, eventID);
 
             if (stmt.executeUpdate() == 1) {
-                System.out.print("Delete Successful!");
+                //System.out.print("Delete Successful!");
                 success = true;
             }
             else
             {
-                System.out.print("Event not found!");
+                //System.out.print("Event not found!");
             }
             closeConnection(true);
 
         }
         catch (SQLException e)
         {
-            System.out.print("Event Delete SQL Exception: " + e.getMessage());
+            //System.out.print("Event Delete SQL Exception: " + e.getMessage());
             closeConnection(false);
         }
         catch (Exception e)
         {
-            System.out.print("Event Delete General Exception: " + e.getMessage());
+            //System.out.print("Event Delete General Exception: " + e.getMessage());
             closeConnection(false);
         }
         finally
@@ -200,12 +200,12 @@ public class EventDAO extends DAO {
             stmt = connection.prepareStatement(sql);
 
             if (stmt.executeUpdate() > 0) {
-                System.out.print("Delete successful!");
+                //System.out.print("Delete successful!");
                 success = true;
             }
             else
             {
-                System.out.print("Delete unsuccessful");
+                //System.out.print("Delete unsuccessful");
             }
 
             closeConnection(true);
@@ -213,12 +213,12 @@ public class EventDAO extends DAO {
         }
         catch (SQLException e)
         {
-            System.out.print("Event DeleteAll SQL Exception: " + e.getMessage());
+            //System.out.print("Event DeleteAll SQL Exception: " + e.getMessage());
             closeConnection(false);
         }
         catch (Exception e)
         {
-            System.out.print("Event DeleteAll General Exception: " + e.getMessage());
+            //System.out.print("Event DeleteAll General Exception: " + e.getMessage());
             closeConnection(false);
         }
         finally
@@ -260,22 +260,22 @@ public class EventDAO extends DAO {
             }
 
             if (queryEvents.size() > 0) {
-                System.out.print("Events found!");
+                //System.out.print("Events found!");
             }
             else {
-                System.out.print("No events found!");
+                //System.out.print("No events found!");
             }
             closeConnection(true);
 
         }
         catch (SQLException e)
         {
-            System.out.print("Event ReadPerson SQL Exception: " + e.getMessage());
+            //System.out.print("Event ReadPerson SQL Exception: " + e.getMessage());
             closeConnection(false);
         }
         catch (Exception e)
         {
-            System.out.print("Event ReadPerson General Exception: " + e.getMessage());
+            //System.out.print("Event ReadPerson General Exception: " + e.getMessage());
             closeConnection(false);
         }
         finally
