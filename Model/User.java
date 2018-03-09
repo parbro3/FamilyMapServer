@@ -36,7 +36,7 @@ public class User {
     /**
      * User's ID (UUID)
      */
-    private String userID;
+    private String personID;
 
 
     /**
@@ -51,7 +51,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.setUserID(this.generateID());
+        this.setPersonID(this.generateID());
     }
 
     public String getUserName() {
@@ -107,10 +107,10 @@ public class User {
         return UUID.randomUUID().toString();
     }
 
-    public String getUserID() { return userID; }
+    public String getPersonID() { return personID; }
 
-    public void setUserID(String ID) {
-        this.userID = ID;
+    public void setPersonID(String ID) {
+        this.personID = ID;
     }
 
     /*

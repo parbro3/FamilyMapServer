@@ -96,14 +96,15 @@ public class EventDAO extends DAO {
 
             while (keyRS.next()) {
                 Event event = new Event();
-                event.setDescendant(keyRS.getString(1));
-                event.setPersonID(keyRS.getString(2));
-                event.setLatitude(keyRS.getString(3));
-                event.setLongitude(keyRS.getString(4));
-                event.setCountry(keyRS.getString(5));
-                event.setCity(keyRS.getString(6));
-                event.setEventType(keyRS.getString(7));
-                event.setYear(keyRS.getString(8));
+                event.setEventID(keyRS.getString(1));
+                event.setDescendant(keyRS.getString(2));
+                event.setPersonID(keyRS.getString(3));
+                event.setLatitude(keyRS.getString(4));
+                event.setLongitude(keyRS.getString(5));
+                event.setCountry(keyRS.getString(6));
+                event.setCity(keyRS.getString(7));
+                event.setEventType(keyRS.getString(8));
+                event.setYear(keyRS.getString(9));
 
                 queryEvents.add(event);
             }

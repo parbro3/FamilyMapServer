@@ -4,7 +4,7 @@ package Data;
  * Created by Parker on 3/7/18.
  */
 
-public class MiddleName {
+public class FemaleNames {
     String[] data;
 
     public String[] getData() {

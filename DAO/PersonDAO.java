@@ -48,7 +48,7 @@ public class PersonDAO extends DAO {
             stmt.setString(5, person.getGender());
             stmt.setString(6, person.getFatherID());
             stmt.setString(7, person.getMotherID());
-            stmt.setString(7, person.getSpouseID());
+            stmt.setString(8, person.getSpouseID());
 
 
             //if it inserted a row.
@@ -259,12 +259,12 @@ public class PersonDAO extends DAO {
                 Person person = new Person();
                 person.setPersonID(keyRS.getString(1));
                 person.setDescendant(keyRS.getString(2));
-                person.setFirstName(keyRS.getString(4));
-                person.setLastName(keyRS.getString(5));
-                person.setGender(keyRS.getString(6));
-                person.setFatherID(keyRS.getString(7));
+                person.setFirstName(keyRS.getString(3));
+                person.setLastName(keyRS.getString(4));
+                person.setGender(keyRS.getString(5));
+                person.setFatherID(keyRS.getString(6));
                 person.setMotherID(keyRS.getString(7));
-                person.setSpouseID(keyRS.getString(7));
+                person.setSpouseID(keyRS.getString(8));
 
                 queryPersons.add(person);
             }

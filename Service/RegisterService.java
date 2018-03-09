@@ -60,9 +60,16 @@ public class RegisterService{
                         dao.getAuthTokenDAO().createAuthToken(authToken);
 
                         rResult.setUserName(user.getUserName());
-                        rResult.setPersonID(user.getUserID());
+                        rResult.setPersonID(user.getPersonID());
 
                         rResult.setAuthToken(authToken.getAuthTokenID());
+
+                        //now call the fill...
+                        FillRequest frequest = new FillRequest();
+                        frequest.setUserName(request.getUserName());
+                        frequest.setGenerations(4);
+                        FillService fservice = new FillService();
+                        fservice.service(frequest);
                     }
                 } else {
                     rResult.setMessage("Username already taken by another user");

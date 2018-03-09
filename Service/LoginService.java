@@ -24,7 +24,7 @@ public class LoginService {
     //gotta build user object out of the request...
     User user = null;
     AuthToken authToken = null;
-    DAO dao = null;
+    DAO dao = new DAO();
 
     /**
      * Brains of the login service. Verifies Request.
@@ -57,7 +57,7 @@ public class LoginService {
 
 
                         lResult.setUserName(user.getUserName());
-                        lResult.setPersonID(user.getUserID());
+                        lResult.setPersonID(user.getPersonID());
                         lResult.setAuthToken(authToken.getAuthTokenID());
 
                         return lResult;
@@ -66,7 +66,7 @@ public class LoginService {
                         lResult.setMessage("Password is incorrect");
                     }
                 } else {
-                    lResult.setMessage("Username doesn't exist");
+                    lResult.setMessage("Username does not exist");
                 }
             } else {
                 lResult.setMessage(("Request property missing or has invalid value"));

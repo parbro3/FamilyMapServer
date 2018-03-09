@@ -11,11 +11,7 @@ public class FillResult implements Result {
     /**
      * FillResult's success message
      */
-    String successMessage;
-    /**
-     * FillResult's error message
-     */
-    String errorMessage;
+    String message;
 
     /**
      * Empty constructor
@@ -23,19 +19,11 @@ public class FillResult implements Result {
     public FillResult() {
     }
 
-    public String getSuccessMessage() {
-        return successMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setSuccessMessage(String successMessage) {
-        this.successMessage = successMessage;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

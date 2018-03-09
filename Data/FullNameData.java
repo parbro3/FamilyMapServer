@@ -5,15 +5,15 @@ package Data;
  */
 
 public class FullNameData {
-    FirstName firstNames;
+    FemaleNames firstNames;
     LastName lastNames;
-    MiddleName middleNames;
+    MaleNames maleNames;
 
-    public FirstName getFirstNames() {
+    public FemaleNames getFirstNames() {
         return firstNames;
     }
 
-    public void setFirstNames(FirstName firstNames) {
+    public void setFirstNames(FemaleNames firstNames) {
         this.firstNames = firstNames;
     }
 
@@ -25,11 +25,11 @@ public class FullNameData {
         this.lastNames = lastNames;
     }
 
-    public MiddleName getMiddleNames() {
-        return middleNames;
+    public MaleNames getMiddleNames() {
+        return maleNames;
     }
 
-    public void setMiddleNames(MiddleName middleNames) {
-        this.middleNames = middleNames;
+    public void setMiddleNames(MaleNames middleNames) {
+        this.maleNames = middleNames;
     }
 }
