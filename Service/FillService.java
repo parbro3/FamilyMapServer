@@ -64,7 +64,7 @@ public class FillService {
      */
     public FillResult service( FillRequest request ){
 
-        System.out.print("Entered Fill service function!");
+        //System.out.print("Entered Fill service function!");
 
         FillResult result = new FillResult();
         try
@@ -123,19 +123,19 @@ public class FillService {
                 else
                 {
                     result.setMessage("Invalid Username");
-                    System.out.print("Invalid Username");
+                    //System.out.print("Invalid Username");
                 }
             }
             else
             {
                 result.setMessage("Invalid Generation Value or null userName");
-                System.out.print("Invalid Generation Value or null userName");
+                //System.out.print("Invalid Generation Value or null userName");
             }
         }
         catch(Exception e)
         {
             result.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
         return result;
@@ -255,7 +255,7 @@ public class FillService {
                 return false;
             }
         } catch (SQLException e) {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         return true;
     }

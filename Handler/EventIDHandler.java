@@ -27,7 +27,7 @@ public class EventIDHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange)
     {
-        System.out.print("PersonID Handler!\n");
+        //System.out.print("PersonID Handler!\n");
 
         Boolean success = false;
         EventIDResult eidResult = null;
@@ -44,7 +44,7 @@ public class EventIDHandler implements HttpHandler {
                 //get id from url
                 URI url = exchange.getRequestURI();
                 String urlString = url.toString();
-                System.out.print("URL: " + urlString);
+                //System.out.print("URL: " + urlString);
                 String[] urlParameters = urlString.split("/");
 
                 //get auth token from header
@@ -129,7 +129,7 @@ public class EventIDHandler implements HttpHandler {
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
     }

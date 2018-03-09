@@ -47,11 +47,11 @@ public class Encoder {
         }
         catch(FileNotFoundException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         return null;
     }

@@ -31,7 +31,7 @@ public class ClearService {
      */
     public ClearResult service( ClearRequest request ){
 
-        System.out.print("Entered Clear service function!" );
+        //System.out.print("Entered Clear service function!" );
 
         //probably need to edit this DAO stuff to check for stuff first butttt....
         ClearResult cResult = new ClearResult();
@@ -51,12 +51,12 @@ public class ClearService {
         catch(SQLException e)
         {
             cResult.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            ////System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
             cResult.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            ////System.out.print(e.getMessage());
         }
         finally
         {

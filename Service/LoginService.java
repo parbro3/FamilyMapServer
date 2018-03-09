@@ -35,7 +35,7 @@ public class LoginService {
      */
     public LoginResult service(LoginRequest request) {
 
-        System.out.print("Entered Login service function!");
+        //System.out.print("Entered Login service function!");
 
         LoginResult lResult = new LoginResult();
 
@@ -73,10 +73,10 @@ public class LoginService {
             }
         } catch (SQLException e) {
             lResult.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         } catch (Exception e) {
             lResult.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         return lResult;
     }
@@ -90,11 +90,11 @@ public class LoginService {
         }
         catch(SQLException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         return false;
     }
@@ -105,7 +105,7 @@ public class LoginService {
                 return false;
             }
         } catch (SQLException e) {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         return true;
     }

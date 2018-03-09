@@ -22,7 +22,7 @@ public class LoadHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange)
     {
-        System.out.print("Load Handler!\n");
+        //System.out.print("Load Handler!\n");
 
         Boolean success = false;
         LoadResult result = null;
@@ -43,7 +43,7 @@ public class LoadHandler implements HttpHandler {
                 String reqData = encoder.readString(reqBody);
 
                 //print json data
-                System.out.println("Data\n" + reqData + "\n");
+                //System.out.println("Data\n" + reqData + "\n");
 
                 //****************************************************
 
@@ -60,7 +60,7 @@ public class LoadHandler implements HttpHandler {
                 catch(Exception e)
                 {
                     result.setMessage("Invalid request data (missing values, invalid values, etc.)");
-                    System.out.print(e.getMessage());
+                    //System.out.print(e.getMessage());
                 }
 
                 respData = encoder.encode(result);
@@ -87,7 +87,7 @@ public class LoadHandler implements HttpHandler {
         }
         catch(Exception e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
     }

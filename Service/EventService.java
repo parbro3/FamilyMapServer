@@ -37,17 +37,17 @@ public class EventService {
      */
     public EventResult service(EventRequest request) {
         {
-            System.out.print("Entered Event service function!");
+            //System.out.print("Entered Event service function!");
 
             EventResult result = new EventResult();
 
             //probably need to edit this DAO stuff to check for stuff first butttt....
             try {
                 dao.initialize();
-                System.out.print("looking for authtoken: " + request.getAuthID());
+                //System.out.print("looking for authtoken: " + request.getAuthID());
                 AuthToken authToken = dao.getAuthTokenDAO().readAuthToken(request.getAuthID());
                 if (authToken != null) {
-                    System.out.print("authToken is not null! ");
+                    //System.out.print("authToken is not null! ");
 
                     User user = dao.getUserDAO().readUser(authToken.getUserName());
                     ArrayList<Event> events = dao.getEventDAO().readPersonEvents(user.getUserName());
@@ -62,10 +62,10 @@ public class EventService {
                 }
             } catch (SQLException e) {
                 result.setMessage("Internal Server Error: " + e.getMessage());
-                System.out.print(e.getMessage());
+                //System.out.print(e.getMessage());
             } catch (Exception e) {
                 result.setMessage("Internal Server Error: " + e.getMessage());
-                System.out.print(e.getMessage());
+                //System.out.print(e.getMessage());
             }
             return result;
         }

@@ -38,7 +38,7 @@ public class RegisterService{
      */
     public RegisterResult service( RegisterRequest request )
     {
-        System.out.print("Entered service function!" );
+        //System.out.print("Entered service function!" );
 
         RegisterResult rResult = new RegisterResult();
 
@@ -82,12 +82,12 @@ public class RegisterService{
         catch(SQLException e)
         {
             rResult.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         catch(Exception e)
         {
             rResult.setMessage("Internal Server Error: " + e.getMessage());
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         return rResult;
     }
@@ -103,7 +103,7 @@ public class RegisterService{
         }
         catch(SQLException e)
         {
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
 
         return true;
