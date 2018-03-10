@@ -7,7 +7,7 @@ package Service.Request;
  */
 
 
-public class RegisterRequest implements Request{
+public class RegisterRequest {
 
     /**
      * RegisterRequest's username

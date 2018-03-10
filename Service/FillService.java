@@ -1,12 +1,9 @@
 package Service;
-import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DAO.DAO;
 import Service.Request.FillRequest;
-import Service.Result.FillResult;
-import Service.Request.Request;
 import Service.Result.FillResult;
 import Model.Person;
 import Model.Event;

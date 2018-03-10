@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import DAO.DAO;
 import Service.Request.ClearRequest;
-import Service.Request.Request;
 import Service.Result.ClearResult;
 
 /**
