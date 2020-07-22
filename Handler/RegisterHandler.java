@@ -38,6 +38,24 @@ public class RegisterHandler implements HttpHandler{
             //check for post... should be post
             if(exchange.getRequestMethod().toLowerCase().equals("post"))
             {
+
+
+                //just adding this for Code Guru test on aws
+                List<Integer> listOfInts = new ArrayList<Integer>();
+                listOfInts.add(10);
+                listOfInts.add(20);
+                listOfInts.add(30);
+                listOfInts.add(40);
+                listOfInts.add(50);
+                for(int i = 0; i < 10; i++){
+                    for(int j = 0; j < 20; j++){
+                        for(int k = 0; k < 30; k++){
+                            listOfInts.add(1);            
+                        }
+                    }
+                }
+
+
                 //*************** GET DATA FROM EXCHANGE ****************
 
                 Headers reqHeaders = exchange.getRequestHeaders();
