@@ -40,7 +40,6 @@ public class RegisterHandler implements HttpHandler{
             {
 
 
-                /*
                 //just adding this for Code Guru test on aws
                 List<Integer> listOfInts = new ArrayList<Integer>();
                 listOfInts.add(10);
@@ -51,11 +50,15 @@ public class RegisterHandler implements HttpHandler{
                 for(int i = 0; i < 10; i++){
                     for(int j = 0; j < 20; j++){
                         for(int k = 0; k < 30; k++){
-                            listOfInts.add(1);            
+                            for(int l = 0; l < 20; l++){
+                                listOfInts.add(1);            
+                            }
+                            listOfInts.add(2);            
                         }
+                        listOfInts.add(3);            
                     }
+                    listOfInts.add(4);            
                 }
-                */
 
 
                 //*************** GET DATA FROM EXCHANGE ****************
