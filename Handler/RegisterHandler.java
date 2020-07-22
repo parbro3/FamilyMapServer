@@ -40,6 +40,7 @@ public class RegisterHandler implements HttpHandler{
             {
 
 
+                /*
                 //just adding this for Code Guru test on aws
                 List<Integer> listOfInts = new ArrayList<Integer>();
                 listOfInts.add(10);
@@ -54,6 +55,7 @@ public class RegisterHandler implements HttpHandler{
                         }
                     }
                 }
+                */
 
 
                 //*************** GET DATA FROM EXCHANGE ****************
